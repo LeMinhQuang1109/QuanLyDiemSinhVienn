@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách sinh viên đăng ký</title>
+    <!-- Thêm Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    @model IEnumerable<QuanLiDiem.Models.RegistrationModel>
+
+    <div class="container mt-4">
+        <h2 class="mb-4">Danh sách sinh viên đăng ký</h2>
+
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Họ và tên</th>
+                    <th>SĐT</th>
+                    <th>CCCD</th>
+                    <th>Quê quán</th>
+                    <th>Ngành học</th>
+                    <th>Điểm TBM 1</th>
+                    <th>Điểm TBM 2</th>
+                    <th>Điểm TBM 3</th>
+                    <th>Xếp loại</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var sinhvien in Model)
+                {
+                    <tr data-id="@sinhvien.Id">
+                        <td>@sinhvien.Id</td>
+                        <td>@sinhvien.HoTen</td>
+                        <td>@sinhvien.CCCD</td>
+                        <td>@sinhvien.SDT</td>
+                        <td>@sinhvien.DiaChi</td>
+                        <td>@sinhvien.NganhHoc</td>
+                        <td>@sinhvien.DTB1</td>
+                        <td>@sinhvien.DTB2</td>
+                        <td>@sinhvien.DTB3</td>
+                        <td>@sinhvien.XepLoai</td>
+                        <td>
+                            <button class="btn btn-success btn-sm approve-btn" data-id="@sinhvien.Id">Duyệt</button>
+                            <button class="btn btn-danger btn-sm reject-btn" data-id="@sinhvien.Id">Hủy</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Approve Dialog Modal -->
+    <div class="modal fade" id="approveModal" tabindex="-1" role="dialog" aria-labelledby="approveModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="approveModalLabel">Xác nhận</h5>
+                </div>
+                <div class="modal-body">
+                    Bạn có đồng ý duyệt sinh viên này không?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="confirmApprove">Đồng ý</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reject Dialog Modal -->
+    <div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="rejectModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="rejectModalLabel">Xác nhận</h5>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn hủy đăng ký sinh viên này không?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="confirmReject">Đồng ý</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thêm Bootstrap JS và jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.approve-btn').click(function() {
+                var sinhvienId = $(this).data('id');
+                $('#confirmApprove').data('id', sinhvienId);
+                $('#approveModal').modal('show');
+            });
+
+            $('#confirmApprove').click(function() {
+                var sinhvienId = $(this).data('id');
+                var row = $('button[data-id="' + sinhvienId + '"]').closest('tr');
+
+                $.ajax({
+                    url: '@Url.Action("ApproveAndDetails", "SinhVien")',
+                    type: 'POST',
+                    data: { id: sinhvienId },
+                    success: function(response) {
+                        if (response.mssv) {
+                            window.location.href = '@Url.Action("Details", "SinhVien", new { mssv = "__mssv__" })'.replace('__mssv__', response.mssv);
+                        }
+                        row.remove();
+                        $('#approveModal').modal('hide');
+                    },
+                    error: function() {
+                        alert('Có lỗi xảy ra khi duyệt sinh viên.');
+                    }
+                });
+            });
+
+            $('.reject-btn').click(function() {
+                var sinhvienId = $(this).data('id');
+                $('#confirmReject').data('id', sinhvienId);
+                $('#rejectModal').modal('show');
+            });
+
+            $('#confirmReject').click(function() {
+                var sinhvienId = $(this).data('id');
+                var row = $('button[data-id="' + sinhvienId + '"]').closest('tr');
+
+                $.ajax({
+                    url: '@Url.Action("Delete", "SinhVien")',
+                    type: 'POST',
+                    data: { id: sinhvienId },
+                    success: function() {
+                        row.remove();
+                        $('#rejectModal').modal('hide');
+                    },
+                    error: function() {
+                        alert('Có lỗi xảy ra khi hủy sinh viên.');
+                    }
+                });
+            });
+
+            $('.btn-secondary[data-dismiss="modal"]').click(function () {
+                $(this).closest('.modal').modal('hide');
+            });
+        });
+    </script>
+</body>
+</html>

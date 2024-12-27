@@ -1,0 +1,75 @@
+﻿﻿ /* Đặt giới hạn chiều rộng và căn chỉnh */
+.container {
+    max-width: 100%;
+}
+
+
+form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-label {
+    font-weight: bold;
+    color: #555;
+}
+
+.form-control {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.text-danger {
+    font-size: 0.9em;
+}
+
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+.btn-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+    .btn-link:hover {
+        text-decoration: underline;
+    }
+
+
+
+hr {
+    border: 2px solid black;
+}
+
+/* Tùy chỉnh nhãn (label) và khoảng cách */
+.col-form-label {
+    font-weight: bold;
+    text-align: right; /* Canh phải nhãn */
+}
+
+/* Tăng chiều rộng input để phù hợp với không gian */
+.form-control {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Thêm khoảng cách giữa nhãn và input */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.text-center {
+    text-align: center;
+}

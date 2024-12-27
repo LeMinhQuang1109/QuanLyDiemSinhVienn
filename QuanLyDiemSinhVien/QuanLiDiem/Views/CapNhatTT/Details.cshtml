@@ -1,0 +1,131 @@
+﻿@model QuanLiDiem.Models.DanhSachSinhVien
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<style>
+    .card-equal-height {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        border-radius: 8px;
+    }
+
+    .card-header {
+        font-weight: bold;
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    .table th {
+        width: 40%; /* Tỷ lệ của cột tiêu đề */
+        white-space: nowrap;
+    }
+
+    .table td {
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    .container h1 {
+        font-size: 1.8rem;
+        font-weight: bold;
+    }
+
+    .btn-link {
+        font-size: 1rem;
+        color: #dc3545;
+        font-weight: bold;
+        text-decoration: underline;
+        padding: 0;
+    }
+
+    .btn-lg {
+        font-size: 1.2rem;
+    }
+</style>
+
+<div class="container mt-4">
+    <h1 class="text-center text-uppercase">Hệ Thống Quản Lý Điểm</h1>
+    <div class="row g-4 mt-4">
+        <!-- Thông tin sinh viên -->
+        <div class="col-md-6">
+            <div class="card border-primary card-equal-height">
+                <div class="card-header bg-primary text-white">
+                    Thông Tin Sinh Viên
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Mã Sinh Viên:</th>
+                            <td>@Html.DisplayFor(model => model.MSSV)</td>
+                        </tr>
+                        <tr>
+                            <th>Họ và Tên:</th>
+                            <td>@Html.DisplayFor(model => model.HoTen)</td>
+                        </tr>
+                        <tr>
+                            <th>Giới Tính:</th>
+                            <td>@Html.DisplayFor(model => model.GioiTinh)</td>
+                        </tr>
+                        <tr>
+                            <th>CCCD:</th>
+                            <td>@Html.DisplayFor(model => model.CanCuocCongDan)</td>
+                        </tr>
+                        <tr>
+                            <th>Số Điện Thoại:</th>
+                            <td>@Html.DisplayFor(model => model.SoDienThoai)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thông tin liên lạc -->
+        <div class="col-md-6">
+            <div class="card border-danger card-equal-height">
+                <div class="card-header bg-danger text-white">
+                    Thông Tin Khác
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Địa Chỉ:</th>
+                            <td>@Html.DisplayFor(model => model.DiaChi)</td>
+                        </tr>
+                        <tr>
+                            <th>Email:</th>
+                            <td>@Html.DisplayFor(model => model.Email)</td>
+                        </tr>
+                        <tr>
+                            <th>Mã Ngành:</th>
+                            <td>@Html.DisplayFor(model => model.MaNganh)</td>
+                        </tr>
+                        <tr>
+                            <th>Tên Tài Khoản:</th>
+                            <td>@Html.DisplayFor(model => model.TenTaiKhoan)</td>
+                        </tr>
+                        <tr>
+                            <th>Mật Khẩu:</th>
+                            <td>@Html.DisplayFor(model => model.MatKhau)</td>
+                        </tr>
+                        <tr>
+                            <th>Vai Trò:</th>
+                            <td>@Html.DisplayFor(model => model.VaiTro)</td>
+                        </tr>
+                    </table>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a asp-action="Index" class="btn btn-secondary btn-lg">Trở Lại</a>
+    </div>
+</div>

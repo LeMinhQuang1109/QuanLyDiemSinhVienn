@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+</head>
+<body>
+    <div class="container mt-1">
+        <!-- Swiper Slide -->
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="~/images/slide1.jpg" alt="Slide 1" style="width: 1520px; height: auto;">
+                </div>
+                <div class="swiper-slide">
+                    <img src="~/images/slide2.jpg" alt="Slide 2" style="width: 1520px; height: auto;">
+                </div>
+                <div class="swiper-slide">
+                    <img src="~/images/slide3.jpg" alt="Slide 3" style="width: 1520px; height: auto;">
+                </div>
+            </div>
+            <!-- Navigation buttons -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <!-- Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.mySwiper', {
+            loop: true, // Lặp lại slide
+            autoplay: {
+                delay: 3000, // Tự động chuyển slide sau 3 giây
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+    </script>
+</body>

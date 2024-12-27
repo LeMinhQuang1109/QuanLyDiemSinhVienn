@@ -1,0 +1,96 @@
+﻿@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Đăng Nhập";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card mt-5 shadow-lg border-0 card-login">
+                <div class="card-header text-center bg-dark text-white">
+                    <h2>Đăng Nhập</h2>
+                </div>
+                <div class="card-body p-5" style="background-color: white">
+                    @if (ViewData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            @ViewData["ErrorMessage"]
+                        </div>
+                    }
+
+                    <form method="post">
+                        <div class="mb-3">
+                            <b><label asp-for="TenTaiKhoan" class="form-label"></label></b>
+                            <input asp-for="TenTaiKhoan" class="form-control" placeholder="Tên tài khoản" />
+                            <span asp-validation-for="TenTaiKhoan" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <b><label asp-for="MatKhau" class="form-label"></label></b>
+                            <input asp-for="MatKhau" id="MatKhau" class="form-control" placeholder="Mật khẩu" type="password" />
+                            <span asp-validation-for="MatKhau" class="text-danger"></span>
+                        </div>
+
+                        <!-- Thêm phần checkbox để ẩn/hiện mật khẩu -->
+                        <div class="mb-3">
+                            <input type="checkbox" id="ShowPassword" /> <label for="ShowPassword">Hiển thị mật khẩu</label>
+                        </div>
+
+                        <br>
+                        <button type="submit" class="btn btn-dark w-100">Đăng Nhập</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal để hiển thị thông báo lỗi -->
+@if (ViewData["ErrorMessage"] != null)
+{
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Lỗi Đăng Nhập</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @ViewData["ErrorMessage"]
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            if ("@ViewData["ErrorMessage"]" !== "") {
+                var errorModal = new bootstrap.Modal(document.getElementById('errorModal'), {
+                    keyboard: false
+                });
+                errorModal.show();
+            }
+
+            // Khi nhấn "Đóng" modal, không điều hướng đi đâu, chỉ đóng modal lại
+            $('#errorModal').on('hidden.bs.modal', function () {
+                // Không làm gì thêm khi modal đóng
+            });
+
+            // Thêm chức năng hiển thị/ẩn mật khẩu
+            document.getElementById('ShowPassword').addEventListener('change', function () {
+                var passwordField = document.getElementById('MatKhau');
+                if (this.checked) {
+                    passwordField.type = 'text'; // Hiển thị mật khẩu
+                } else {
+                    passwordField.type = 'password'; // Ẩn mật khẩu
+                }
+            });
+        });
+    </script>
+}

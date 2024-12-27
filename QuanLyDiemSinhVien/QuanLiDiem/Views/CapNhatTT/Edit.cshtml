@@ -1,0 +1,133 @@
+﻿@model QuanLiDiem.Models.DanhSachSinhVien
+@{
+    ViewData["Title"] = "Cập nhật thông tin sinh viên";
+}
+
+<link href="~/css/capnhattt.css" rel="stylesheet" />
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-sm-12">
+            <form asp-action="Edit" asp-route-mssv="@Model.MSSV">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <input type="hidden" asp-for="MSSV" /> <!-- Đảm bảo sử dụng MSSV là khóa chính -->
+                <h4 class="text-center">Cập nhật thông tin</h4>
+                <hr />
+
+                <div class="row">
+                    <!-- Cột trái (bảng 1) -->
+                    <div class="col-md-6">
+
+                        <!-- HoTen -->
+                        <div class="form-group row mb-3 align-items-center">
+                            <label asp-for="HoTen" class="col-sm-4 col-form-label">Họ tên</label>
+                            <div class="col-sm-8">
+                                <input asp-for="HoTen" class="form-control" readonly />
+                                <span asp-validation-for="HoTen" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- GioiTinh -->
+                        <div class="form-group row mb-3 align-items-center">
+                            <label asp-for="GioiTinh" class="col-sm-4 col-form-label">Giới tính</label>
+                            <div class="col-sm-8">
+                                <input asp-for="GioiTinh" class="form-control" readonly />
+                                <span asp-validation-for="GioiTinh" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- CanCuocCongDan -->
+                        <div class="form-group row mb-3 align-items-center">
+                            <label asp-for="CanCuocCongDan" class="col-sm-4 col-form-label">Căn cước công dân</label>
+                            <div class="col-sm-8">
+                                <input asp-for="CanCuocCongDan" class="form-control" readonly />
+                                <span asp-validation-for="CanCuocCongDan" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- SoDienThoai -->
+                        <div class="form-group row mb-3 align-items-center">
+                            <label asp-for="SoDienThoai" class="col-sm-4 col-form-label">Số điện thoại</label>
+                            <div class="col-sm-8">
+                                <input asp-for="SoDienThoai" class="form-control" />
+                                <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group row mb-3 align-items-center">
+                            <label asp-for="Email" class="col-sm-4 col-form-label">Email</label>
+                            <div class="col-sm-8">
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cột phải (bảng 2) -->
+                    <div class="col-md-6">
+
+                        <!-- DiaChi -->
+                        <div class="form-group row mb-3 align-items-center">
+                            <label asp-for="DiaChi" class="col-sm-4 col-form-label">Địa chỉ</label>
+                            <div class="col-sm-8">
+                                <input asp-for="DiaChi" class="form-control" />
+                                <span asp-validation-for="DiaChi" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- MaNganh -->
+                        <div class="form-group row mb-3 align-items-center">
+                            <label asp-for="MaNganh" class="col-sm-4 col-form-label">Mã ngành</label>
+                            <div class="col-sm-8">
+                                <input asp-for="MaNganh" class="form-control" readonly />
+                                <span asp-validation-for="MaNganh" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- TenTaiKhoan -->
+                        <div class="form-group row mb-3 align-items-center">
+                            <label asp-for="TenTaiKhoan" class="col-sm-4 col-form-label">Tên tài khoản</label>
+                            <div class="col-sm-8">
+                                <input asp-for="TenTaiKhoan" class="form-control" readonly />
+                                <span asp-validation-for="TenTaiKhoan" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- MatKhau -->
+                        <div class="form-group row mb-3 align-items-center">
+                            <label asp-for="MatKhau" class="col-sm-4 col-form-label">Mật khẩu</label>
+                            <div class="col-sm-8">
+                                <input asp-for="MatKhau" class="form-control" />
+                                <span asp-validation-for="MatKhau" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- VaiTro -->
+                        <div class="form-group row mb-3 align-items-center">
+                            <label asp-for="VaiTro" class="col-sm-4 col-form-label">Vai trò</label>
+                            <div class="col-sm-8">
+                                <input asp-for="VaiTro" class="form-control" readonly />
+                                <span asp-validation-for="VaiTro" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Save Button -->
+                <div class="form-group row mt-4">
+                    <div class="col-sm-12 text-center">
+                        <a asp-action="Index" class="btn btn-secondary" style="width:100px;padding:10px; text-align:center">Quay lại</a>
+                        <input type="submit" value="Lưu" style="width:100px" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> 
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
