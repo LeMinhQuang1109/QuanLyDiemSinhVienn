@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\GiangVien\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

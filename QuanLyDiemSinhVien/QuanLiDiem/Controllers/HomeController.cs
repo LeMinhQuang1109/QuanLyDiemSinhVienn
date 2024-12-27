@@ -67,6 +67,10 @@ public class HomeController : Controller
                 {
                     return RedirectToAction("Index", "User");
                 }
+                else if (user.VaiTro == "GiangVien")
+                {
+                    return RedirectToAction("TimKiem", "GiangVien");
+                }
                 else
                 {
                     // Nếu không có vai trò, có thể chuyển hướng về trang mặc định
