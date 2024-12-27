@@ -1,5 +1,4 @@
-﻿@model QuanLiDiem.Models.DanhSachSinhVien
-
+﻿@model DanhSachSinhVien
 @{
     ViewData["Title"] = "Details";
 }
@@ -46,7 +45,7 @@
     }
 </style>
 
-<div class="container mt-4">
+<<div class="container mt-4">
     <h1 class="text-center text-uppercase">Hệ Thống Quản Lý Điểm</h1>
     <div class="row g-4 mt-4">
         <!-- Thông tin sinh viên -->
@@ -59,23 +58,23 @@
                     <table class="table table-bordered">
                         <tr>
                             <th>Mã Sinh Viên:</th>
-                            <td>@Html.DisplayFor(model => model.MSSV)</td>
+                            <td>@Model.MSSV</td>
                         </tr>
                         <tr>
                             <th>Họ và Tên:</th>
-                            <td>@Html.DisplayFor(model => model.HoTen)</td>
+                            <td>@Model.HoTen</td>
                         </tr>
                         <tr>
                             <th>Giới Tính:</th>
-                            <td>@Html.DisplayFor(model => model.GioiTinh)</td>
+                            <td>@Model.GioiTinh</td>
                         </tr>
                         <tr>
                             <th>CCCD:</th>
-                            <td>@Html.DisplayFor(model => model.CanCuocCongDan)</td>
+                            <td>@Model.CanCuocCongDan</td>
                         </tr>
                         <tr>
                             <th>Số Điện Thoại:</th>
-                            <td>@Html.DisplayFor(model => model.SoDienThoai)</td>
+                            <td>@Model.SoDienThoai</td>
                         </tr>
                     </table>
                 </div>
@@ -92,34 +91,29 @@
                     <table class="table table-bordered">
                         <tr>
                             <th>Địa Chỉ:</th>
-                            <td>@Html.DisplayFor(model => model.DiaChi)</td>
+                            <td>@Model.DiaChi</td>
                         </tr>
                         <tr>
                             <th>Email:</th>
-                            <td>@Html.DisplayFor(model => model.Email)</td>
+                            <td>@Model.Email</td>
                         </tr>
                         <tr>
                             <th>Mã Ngành:</th>
-                            <td>@Html.DisplayFor(model => model.MaNganh)</td>
+                            <td>@Model.MaNganh</td>
                         </tr>
                         <tr>
                             <th>Tên Tài Khoản:</th>
-                            <td>@Html.DisplayFor(model => model.TenTaiKhoan)</td>
+                            <td>@Model.TenTaiKhoan</td>
                         </tr>
                         <tr>
                             <th>Mật Khẩu:</th>
-                            <td>@Html.DisplayFor(model => model.MatKhau)</td>
+                            <td>@Model.MatKhau</td>
                         </tr>
                         <tr>
                             <th>Vai Trò:</th>
-                            <td>@Html.DisplayFor(model => model.VaiTro)</td>
+                            <td>@Model.VaiTro</td>
                         </tr>
                     </table>
-
-
-
-
-
                 </div>
             </div>
         </div>

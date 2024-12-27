@@ -8,7 +8,7 @@
 
 <div class="row mb-3">
     <div class="col-md-8">
-        <form asp-action="Index" method="get">
+        <form asp-action="Index2" method="get">
             <div class="input-group">
                 <input type="text" name="searchTerm" class="form-control" placeholder="Tìm kiếm theo MSSV hoặc Họ tên..." value="@ViewData["SearchTerm"]" />
                 <button class="btn btn-primary" type="submit">Tìm kiếm</button>
@@ -45,7 +45,7 @@
                 <td>@Html.DisplayFor(modelItem => item.MaNganh)</td>
                 <td>@Html.DisplayFor(modelItem => item.VaiTro)</td>
                 <td>
-                    <a asp-action="Edit" asp-route-MSSV="@item.MSSV" class="btn btn-primary">Chỉnh sửa</a>
+                    <a asp-action="CapNhat" asp-route-MSSV="@item.MSSV" class="btn btn-primary">Chỉnh sửa</a>
                     <a asp-action="Details" asp-route-MSSV="@item.MSSV" class="btn btn-info">Chi tiết</a>
                     <a asp-action="Delete" asp-route-MSSV="@item.MSSV" class="btn btn-danger">Xóa</a>
                 </td>

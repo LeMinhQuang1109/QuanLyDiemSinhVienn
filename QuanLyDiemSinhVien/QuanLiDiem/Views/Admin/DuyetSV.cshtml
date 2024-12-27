@@ -107,12 +107,12 @@
                 var row = $('button[data-id="' + sinhvienId + '"]').closest('tr');
 
                 $.ajax({
-                    url: '@Url.Action("ApproveAndDetails", "SinhVien")',
+                    url: '@Url.Action("ApproveAndDetails", "Admin")',
                     type: 'POST',
                     data: { id: sinhvienId },
                     success: function(response) {
                         if (response.mssv) {
-                            window.location.href = '@Url.Action("Details", "SinhVien", new { mssv = "__mssv__" })'.replace('__mssv__', response.mssv);
+                            window.location.href = '@Url.Action("Details", "Admin", new { mssv = "__mssv__" })'.replace('__mssv__', response.mssv);
                         }
                         row.remove();
                         $('#approveModal').modal('hide');

@@ -1,18 +1,19 @@
 ﻿using QuanLiDiem.Models;
 using Microsoft.AspNetCore.Mvc;
 using QuanLiDiem.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace QuanLiDiem.Controllers
 {
-    public class SinhVienController : Controller
+    public class AdminController : Controller
     {
         private readonly ApplicationDbContext _context;
-        public SinhVienController(ApplicationDbContext context)
+        public AdminController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult DuyetSV()
         {
             // Lấy danh sách sinh viên chưa bị duyệt
             var sinhviens = _context.DanhSachDK.ToList();
@@ -35,7 +36,7 @@ namespace QuanLiDiem.Controllers
                 _context.DanhSachDK.Remove(sinhvien);
                 _context.SaveChanges();
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(DuyetSV));
         }
 
         // Action "Details" nhận tham số mssv

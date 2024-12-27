@@ -11,7 +11,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // Thêm dịch vụ MVC
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddDistributedMemoryCache();
 // Cấu hình dịch vụ Session
 builder.Services.AddSession(options =>
 {

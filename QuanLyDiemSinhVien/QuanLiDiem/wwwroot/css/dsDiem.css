@@ -1,0 +1,107 @@
+﻿/* Base styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header styles */
+h1.text-primary {
+    color: #2c3e50;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 10px;
+}
+
+/* Table styles */
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table-dark {
+    background-color: #34495e;
+    color: #ecf0f1;
+}
+
+.table th,
+.table td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table tbody tr:hover {
+    background-color: #e0f7fa;
+    transition: background-color 0.3s ease;
+}
+
+/* Responsive table */
+@media screen and (max-width: 768px) {
+    .table {
+        font-size: 14px;
+    }
+
+        .table th,
+        .table td {
+            padding: 8px 10px;
+        }
+}
+
+@media screen and (max-width: 480px) {
+    .table {
+        font-size: 12px;
+    }
+
+        .table th,
+        .table td {
+            padding: 6px 8px;
+        }
+}
+
+/* Error message styles */
+.text-danger {
+    color: #e74c3c;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* Custom styles for specific columns */
+.table td:nth-child(6),
+.table td:nth-child(7) {
+    font-weight: bold;
+    color: #2980b9;
+}
+
+.table td:nth-child(8) {
+    font-weight: bold;
+}
+
+    .table td:nth-child(8):contains("Đạt") {
+        color: #27ae60;
+    }
+
+    .table td:nth-child(8):contains("Không đạt") {
+        color: #c0392b;
+    }

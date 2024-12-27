@@ -44,7 +44,6 @@ public class HomeController : Controller
         return View();
     }
 
-    // Action POST để xử lý đăng nhập
     [HttpPost]
     public IActionResult Login(LoginViewModel login)
     {
@@ -55,8 +54,24 @@ public class HomeController : Controller
 
             if (user != null)
             {
-                HttpContext.Session.SetString("Username", user.TenTaiKhoan);
-                return RedirectToAction("Index");
+                // Lưu tên tài khoản vào session
+                HttpContext.Session.SetString("HoTen", user.HoTen);
+                HttpContext.Session.SetString("MSV", user.MSSV);
+
+                // Kiểm tra quyền của người dùng và chuyển hướng đến trang tương ứng
+                if (user.VaiTro == "Admin")
+                {
+                    return RedirectToAction("DuyetSV", "Admin");
+                }
+                else if (user.VaiTro == "User")
+                {
+                    return RedirectToAction("Index", "User");
+                }
+                else
+                {
+                    // Nếu không có vai trò, có thể chuyển hướng về trang mặc định
+                    return RedirectToAction("Index");
+                }
             }
             else
             {
@@ -66,6 +81,7 @@ public class HomeController : Controller
         }
         return View(login);
     }
+
 
     // Action GET để hiển thị trang Index
     public IActionResult Index()
@@ -118,7 +134,7 @@ public class HomeController : Controller
     public IActionResult Logout()
     {
         // Xóa session Username
-        HttpContext.Session.Remove("Username");
+        HttpContext.Session.Remove("HoTen");
 
         // Chuyển hướng về trang Home sau khi đăng xuất
         return RedirectToAction("Index", "Home");

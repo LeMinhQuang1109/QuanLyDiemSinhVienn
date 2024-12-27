@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Diem>
+
+<div class="container mt-5">
+    <link href="~/css/dsDiem.css" rel="stylesheet" />
+    @if (!Model.Any())
+    {
+        <p class="text-danger">Không tìm thấy điểm nào cho sinh viên này.</p>
+    }
+    else
+    {
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>MSSV</th>
+                    <th>Mã HP</th>
+                    <th>Số tín chỉ</th>
+                    <th>Điểm quá trình</th>
+                    <th>Điểm cuối kỳ</th>
+                    <th>Điểm 10</th>
+                    <th>Điểm 4</th>
+                    <th>Kết quả</th>
+                    <th>Học kỳ</th>
+                    <th>Năm học</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var diem in Model)
+                {
+                    <tr>
+                        <td>@diem.MSSV</td>
+                        <td>@diem.MaHP</td>
+                        <td>@diem.SoTinChi</td>
+                        <td>@diem.DiemQuaTrinh</td>
+                        <td>@diem.DiemCuoiKy</td>
+                        <td>@diem.Diem10.ToString("F2")</td>
+                        <td>@diem.Diem4.ToString("F2")</td>
+                        <td>@diem.KetQua</td>
+                        <td>@diem.HocKy</td>
+                        <td>@diem.NamHoc</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
