@@ -44,5 +44,6 @@ namespace QuanLiDiem.Models
         public string? VaiTro { get; set; }  // Vai trò
 
         public virtual ICollection<Diem> Diem { get; set; }
+        public virtual NganhHoc? NganhHoc { get; set; }
     }
 }

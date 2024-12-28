@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace QuanLiDiem.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateTable1 : Migration
+    public partial class CreateTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -53,6 +54,21 @@ namespace QuanLiDiem.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "GiangVien",
+                columns: table => new
+                {
+                    MaGV = table.Column<string>(type: "char(10)", unicode: false, fixedLength: true, maxLength: 10, nullable: false),
+                    TenGV = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    SoDienThoai = table.Column<string>(type: "char(10)", unicode: false, fixedLength: true, maxLength: 10, nullable: true),
+                    DiaChi = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK__GiangVie__2725AEF38D82FDC2", x => x.MaGV);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Diem",
                 columns: table => new
                 {
@@ -77,6 +93,33 @@ namespace QuanLiDiem.Migrations
                         principalColumn: "MSSV",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "LopHocPhan",
+                columns: table => new
+                {
+                    MaHP = table.Column<string>(type: "char(10)", unicode: false, fixedLength: true, maxLength: 10, nullable: false),
+                    TenHP = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    MaGV = table.Column<string>(type: "char(10)", unicode: false, fixedLength: true, maxLength: 10, nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NgayBatDau = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NgayKetThuc = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    GhiChu = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK__LopHocPh__2725A6EC1EE62B30", x => x.MaHP);
+                    table.ForeignKey(
+                        name: "FK__LopHocPhan__MaGV__5165187F",
+                        column: x => x.MaGV,
+                        principalTable: "GiangVien",
+                        principalColumn: "MaGV");
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LopHocPhan_MaGV",
+                table: "LopHocPhan",
+                column: "MaGV");
         }
 
         /// <inheritdoc />
@@ -89,7 +132,13 @@ namespace QuanLiDiem.Migrations
                 name: "Diem");
 
             migrationBuilder.DropTable(
+                name: "LopHocPhan");
+
+            migrationBuilder.DropTable(
                 name: "DanhSachSinhVien");
+
+            migrationBuilder.DropTable(
+                name: "GiangVien");
         }
     }
 }

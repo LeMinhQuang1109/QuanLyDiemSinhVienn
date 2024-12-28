@@ -1,0 +1,164 @@
+﻿<style>
+    .form-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        margin-left: 100px;
+        margin-right: 100px;
+        padding-left: 70px;
+        padding-right: 70px;
+    }
+
+        .form-group label {
+            flex: 0 0 20%; /* Chiếm 20% chiều rộng */
+            margin-bottom: 0;
+            font-weight: bold;
+        }
+
+        .form-group .form-control {
+            flex: 1; /* Chiếm phần còn lại */
+            min-width: 200px;
+            padding: 5px 10px;
+        }
+
+        .form-group input[type="text"],
+        .form-group select {
+            height: 36px; /* Căn chỉnh chiều cao */
+            line-height: 1.5;
+        }
+
+    .btn-group {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px; /* Khoảng cách giữa các nút */
+        margin-top: 20px;
+    }
+
+        .btn-group .btn {
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+    .form-group input[readonly] {
+        background-color: #f8f9fa; /* Màu xám nhạt cho ô chỉ đọc */
+        border-color: #ddd;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    button, a {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+
+</style>
+
+<h2 class="text-center mt-3">Chỉnh sửa Lớp Học Phần</h2>
+<hr />
+<form method="post">
+    <input type="hidden" name="MaHP" value="@Model.MaHP" />
+    <div class="form-group">
+        <label for="TenHP">Tên Lớp:</label>
+        <input type="text" class="form-control" id="TenHP" name="TenHP"
+               value="@Model.TenHP" placeholder="Nhập tên lớp học phần (nếu muốn thay đổi)" />
+    </div>
+
+    <div class="form-group">
+        <label for="MaGV">Mã Giảng Viên:</label>
+        <select class="form-control" id="MaGV" name="MaGV" onchange="updateTenGV(this)">
+            <option value="">-- Chọn Mã Giảng Viên --</option>
+            @foreach (var gv in ViewBag.GiangVienList)
+            {
+                <option value="@gv.MaGV" data-ten-gv="@gv.TenGV">@gv.MaGV</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="TenGV">Tên Giảng Viên:</label>
+        <input type="text" class="form-control" id="TenGV" name="TenGV" readonly />
+    </div>
+
+    <div class="form-group">
+        <label for="NgayBatDau">Ngày Bắt Đầu:</label>
+        <input type="date" class="form-control" id="NgayBatDau" name="NgayBatDau"
+               value="@Model.NgayBatDau?.ToString("yyyy-MM-dd")" />
+    </div>
+
+    <div class="form-group">
+        <label for="NgayKetThuc">Ngày Kết Thúc:</label>
+        <input type="date" class="form-control" id="NgayKetThuc" name="NgayKetThuc"
+               value="@Model.NgayKetThuc?.ToString("yyyy-MM-dd")" />
+    </div>
+
+
+    <div class="form-group">
+        <label for="GhiChu">Ghi Chú:</label>
+        <textarea class="form-control" id="GhiChu" name="GhiChu"
+                  placeholder="Nhập ghi chú (nếu muốn thay đổi)">@Model.GhiChu</textarea>
+    </div>
+
+    @* Nút bấm *@
+
+    <div class="button-container">
+        <button type="submit" class="btn btn-success">Lưu</button>
+        <a href="@Url.Action("Index", "LopHocPhan")" class="btn btn-secondary">Quay lại</a>
+    </div>
+
+    <div class="thong-bao" style="margin-top: 12px">
+        @if (TempData["EditSuccessMessage"] != null)
+        {
+            <div id="success-alert" class="alert alert-success alert-dismissible fade show">
+                @TempData["EditSuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        @if (TempData["EditErrorMessage"] != null)
+        {
+            <div id="error-alert" class="alert alert-danger alert-dismissible fade show">
+                @TempData["EditErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        @if (TempData["DayErrorMessage"] != null)
+        {
+            <div id="day-error-alert" class="alert alert-danger alert-dismissible fade show">
+                @TempData["DayErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+    </div>
+
+</form>
+<script>
+    function updateTenGV(selectElement) {
+        // Lấy giá trị của option được chọn
+        const selectedOption = selectElement.options[selectElement.selectedIndex];
+
+        // Lấy dữ liệu tên giảng viên từ thuộc tính data-ten-gv
+        const tenGV = selectedOption.getAttribute("data-ten-gv") || "";
+
+        // Gán giá trị vào ô input TenGV
+        const tenGVInput = document.getElementById("TenGV");
+        if (tenGVInput) {
+            tenGVInput.value = tenGV;
+        }
+    }
+
+    setTimeout(function () {
+        // Đóng tất cả alert sau 3 giây
+        var alerts = document.querySelectorAll('.alert');
+        alerts.forEach(alert => {
+            var bootstrapAlert = new bootstrap.Alert(alert);
+            bootstrapAlert.close();
+        });
+    }, 3000);
+</script>
+
+
+
+

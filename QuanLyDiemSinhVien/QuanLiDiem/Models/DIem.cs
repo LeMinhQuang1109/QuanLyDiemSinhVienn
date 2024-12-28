@@ -21,7 +21,7 @@ public class Diem
     [Required]
     [Range(0, 10, ErrorMessage = "Điểm quá trình phải từ 0 đến 10")]
     [Display(Name = "Điểm quá trình")]
-    public double DiemQuaTrinh { get; set; }
+    public double DiemQuaTrinh { get; set; } 
 
     [Required]
     [Range(0, 10, ErrorMessage = "Điểm cuối kỳ phải từ 0 đến 10")]
@@ -48,4 +48,6 @@ public class Diem
     [ForeignKey("MSSV")]
     public virtual DanhSachSinhVien? SinhVien { get; set; }
 
+    [ForeignKey("MaHP")]
+    public virtual LopHocPhan? LopHocPhan { get; set; }
 }

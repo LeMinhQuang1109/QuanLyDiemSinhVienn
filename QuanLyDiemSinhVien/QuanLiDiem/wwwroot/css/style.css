@@ -1,0 +1,239 @@
+﻿/* Tiêu đề */
+h2 {
+    text-align: center;
+    font-size: 35px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Container chính */
+.create-info {
+    margin: auto;
+    padding: 5%;
+    width: 60%;
+    background-color: #d6d6d6; /* Nền xám */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Nhóm form */
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+    .form-group label {
+        flex: 0.5;
+        font-weight: bold;
+        margin-right: 10px;
+        color: #333;
+        text-align: left;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        flex: 2;
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+textarea {
+    resize: none;
+    height: 80px;
+}
+
+
+.time {
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+
+.time-group {
+    display: flex;
+    gap: 15px;
+    flex: 2.1;
+    width: 100%;
+}
+
+    .time-group .start-time,
+    .time-group .end-time {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.create-info button[type="submit"],
+.create-info button[type="reset"] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.create-info button[type="submit"] {
+    background-color: #ffa500;
+    color: #fff;
+    font-weight: bold;
+}
+
+.create-info button[type="reset"] {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+}
+
+/* Lịch sử */
+.h3 {
+    margin-top: 30px;
+    color: #333;
+    vertical-align: middle;
+    margin-bottom: 5px;
+}
+
+select {
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* Bảng */
+table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+    table th,
+    table td {
+        padding: 10px 15px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    table th {
+        background-color: #f7f7f7;
+        color: #333;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+th.ghi-chu, td.ghi-chu {
+    max-width: 200px;
+    word-break: break-word;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+/* Thêm CSS để tạo hiệu ứng cho thông báo pop-up */
+.error-popup {
+    position: fixed;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 80%;
+    text-align: center;
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+}
+
+    .error-popup.visible {
+        top: 20px;
+        opacity: 1;
+    }
+
+
+/* Container chính */
+.header-container {
+    margin: 25px 180px; /* Margin trên-dưới: 50px, trái-phải: 300px */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+}
+
+/* Căn chỉnh ngang các phần tử */
+.lichsu {
+    display: flex;
+    width: 100%; /* Chiếm toàn bộ chiều ngang */
+    align-items: center;
+}
+
+/* Phần Lịch sử và dropdown */
+.history {
+    display: flex;
+    align-items: center;
+}
+
+/* Phần Tìm kiếm nằm ở giữa */
+.search-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1; /* Giúp phần tìm kiếm chiếm khoảng trống ở giữa */
+}
+
+/* Phần nút tạo mới */
+.create-section {
+    display: flex;
+    align-items: center;
+    padding-left: 50px;
+}
+
+.search-section {
+    padding: 15px 0 0 0;
+}
+    /* Input tìm kiếm */
+    .search-section input {
+        width: 250px; /* Độ rộng của ô tìm kiếm */
+    }
+
+    /* Nút kính lúp */
+    .search-section button {
+        padding: 5px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .search-section button i {
+            font-size: 17px;
+        }
+
+#filterForm {
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
+    padding: 20px 0 0 0;
+}

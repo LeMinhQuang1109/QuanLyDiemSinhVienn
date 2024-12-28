@@ -1,7 +1,17 @@
 wwwroot\css\capnhattt.css
+wwwroot\css\dsDiem.css
 wwwroot\css\searchCss.css
 wwwroot\css\site.css
+wwwroot\css\style.css
 wwwroot\favicon.ico
+wwwroot\images\background.jpg
+wwwroot\images\iconchucnang.png
+wwwroot\images\icondangky.png
+wwwroot\images\icondangnhap.png
+wwwroot\images\iconhome.webp
+wwwroot\images\slide1.jpg
+wwwroot\images\slide2.jpg
+wwwroot\images\slide3.jpg
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css
 wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
