@@ -26,7 +26,7 @@ namespace QuanLiDiem.Data
             // Thiết lập quan hệ giữa Diem và DanhSachSinhVien
             modelBuilder.Entity<Diem>()
             .HasOne(d => d.SinhVien)
-            .WithMany(s => s.Diem)
+            .WithMany(s => s.Diems)
             .HasForeignKey(d => d.MSSV)
             .OnDelete(DeleteBehavior.Cascade);
 

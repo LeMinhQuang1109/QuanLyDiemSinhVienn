@@ -63,9 +63,9 @@ public class HomeController : Controller
                 {
                     return RedirectToAction("DuyetSV", "Admin");
                 }
-                else if (user.VaiTro == "User")
+                else if (user.VaiTro == "SinhVien")
                 {
-                    return RedirectToAction("Index", "User");
+                    return RedirectToAction("TimKiem", "User");
                 }
                 else if (user.VaiTro == "GiangVien")
                 {
@@ -101,6 +101,7 @@ public class HomeController : Controller
     }
 
     // Action POST để xử lý đổi mật khẩu
+    // Action POST để xử lý đổi mật khẩu
     [HttpPost]
     public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
     {
@@ -133,12 +134,14 @@ public class HomeController : Controller
         return View(model);
     }
 
+
+
     // Action GET để xử lý đăng xuất
     [HttpGet]
     public IActionResult Logout()
     {
         // Xóa session Username
-        HttpContext.Session.Remove("HoTen");
+        HttpContext.Session.Clear();
 
         // Chuyển hướng về trang Home sau khi đăng xuất
         return RedirectToAction("Index", "Home");

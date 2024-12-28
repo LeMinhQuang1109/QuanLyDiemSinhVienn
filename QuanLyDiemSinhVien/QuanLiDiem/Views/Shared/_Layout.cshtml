@@ -27,12 +27,7 @@
                                 Home
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-controller="SinhVien" asp-action="Index">Danh sách Đăng Ký</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white " asp-area="" asp-controller="Diems" asp-action="Index">Danh sách Điểm</a>
-                        </li>
+                        
                         <li class="nav-item dropdown">
                             @if (Context.Session.GetString("HoTen") != null)
                             {
@@ -48,9 +43,6 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" asp-controller="User" asp-action="ThongTin"> Xem thông tin</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" asp-controller="User" asp-action="CapNhat"> Thay đổi thông tin</a>
                                     </li>
                                 </ul>
                             }
@@ -77,10 +69,10 @@
                             }
                         </li>
                         <li class="nav-item">
-                            <b><a class="nav-link text-white" asp-controller="GiangVien" asp-action="CreateGV">Giảng viên</a></b>
+                            <a class="nav-link text-white" asp-controller="GiangVien" asp-action="CreateGV">Giảng viên</a>
                         </li>
                         <li class="nav-item">
-                            <b><a class="nav-link text-white" asp-area="" asp-controller="LopHocPhan" asp-action="Index">Lớp học phần</a></b>
+                            <a class="nav-link text-white" asp-area="" asp-controller="LopHocPhan" asp-action="Index">Lớp học phần</a>
                         </li>
                     </ul>
                 </div>

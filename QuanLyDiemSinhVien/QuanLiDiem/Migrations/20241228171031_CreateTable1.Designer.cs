@@ -12,8 +12,8 @@ using QuanLiDiem.Data;
 namespace QuanLiDiem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241228015452_CreateTable")]
-    partial class CreateTable
+    [Migration("20241228171031_CreateTable1")]
+    partial class CreateTable1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,8 +27,11 @@ namespace QuanLiDiem.Migrations
 
             modelBuilder.Entity("Diem", b =>
                 {
-                    b.Property<string>("MSSV")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<double>("Diem10")
                         .HasColumnType("float");
@@ -49,9 +52,13 @@ namespace QuanLiDiem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("MSSV")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("MaHP")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("char(10)");
 
                     b.Property<string>("NamHoc")
                         .IsRequired()
@@ -60,7 +67,11 @@ namespace QuanLiDiem.Migrations
                     b.Property<int>("SoTinChi")
                         .HasColumnType("int");
 
-                    b.HasKey("MSSV");
+                    b.HasKey("Id");
+
+                    b.HasIndex("MSSV");
+
+                    b.HasIndex("MaHP");
 
                     b.ToTable("Diem");
                 });
@@ -235,10 +246,18 @@ namespace QuanLiDiem.Migrations
             modelBuilder.Entity("Diem", b =>
                 {
                     b.HasOne("QuanLiDiem.Models.DanhSachSinhVien", "SinhVien")
-                        .WithMany("Diem")
+                        .WithMany("Diems")
                         .HasForeignKey("MSSV")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("QuanLiDiem.Models.LopHocPhan", "LopHocPhan")
+                        .WithMany()
+                        .HasForeignKey("MaHP")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("LopHocPhan");
 
                     b.Navigation("SinhVien");
                 });
@@ -255,7 +274,7 @@ namespace QuanLiDiem.Migrations
 
             modelBuilder.Entity("QuanLiDiem.Models.DanhSachSinhVien", b =>
                 {
-                    b.Navigation("Diem");
+                    b.Navigation("Diems");
                 });
 
             modelBuilder.Entity("QuanLiDiem.Models.GiangVien", b =>

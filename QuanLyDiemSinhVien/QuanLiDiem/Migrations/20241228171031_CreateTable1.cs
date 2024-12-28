@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace QuanLiDiem.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateTable : Migration
+    public partial class CreateTable1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -69,32 +69,6 @@ namespace QuanLiDiem.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Diem",
-                columns: table => new
-                {
-                    MSSV = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    MaHP = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SoTinChi = table.Column<int>(type: "int", nullable: false),
-                    DiemQuaTrinh = table.Column<double>(type: "float", nullable: false),
-                    DiemCuoiKy = table.Column<double>(type: "float", nullable: false),
-                    Diem10 = table.Column<double>(type: "float", nullable: false),
-                    Diem4 = table.Column<double>(type: "float", nullable: false),
-                    KetQua = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HocKy = table.Column<int>(type: "int", nullable: false),
-                    NamHoc = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Diem", x => x.MSSV);
-                    table.ForeignKey(
-                        name: "FK_Diem_DanhSachSinhVien_MSSV",
-                        column: x => x.MSSV,
-                        principalTable: "DanhSachSinhVien",
-                        principalColumn: "MSSV",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "LopHocPhan",
                 columns: table => new
                 {
@@ -116,6 +90,50 @@ namespace QuanLiDiem.Migrations
                         principalColumn: "MaGV");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Diem",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MSSV = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    MaHP = table.Column<string>(type: "char(10)", nullable: false),
+                    SoTinChi = table.Column<int>(type: "int", nullable: false),
+                    DiemQuaTrinh = table.Column<double>(type: "float", nullable: false),
+                    DiemCuoiKy = table.Column<double>(type: "float", nullable: false),
+                    Diem10 = table.Column<double>(type: "float", nullable: false),
+                    Diem4 = table.Column<double>(type: "float", nullable: false),
+                    KetQua = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HocKy = table.Column<int>(type: "int", nullable: false),
+                    NamHoc = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Diem", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Diem_DanhSachSinhVien_MSSV",
+                        column: x => x.MSSV,
+                        principalTable: "DanhSachSinhVien",
+                        principalColumn: "MSSV",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Diem_LopHocPhan_MaHP",
+                        column: x => x.MaHP,
+                        principalTable: "LopHocPhan",
+                        principalColumn: "MaHP",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Diem_MaHP",
+                table: "Diem",
+                column: "MaHP");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Diem_MSSV",
+                table: "Diem",
+                column: "MSSV");
+
             migrationBuilder.CreateIndex(
                 name: "IX_LopHocPhan_MaGV",
                 table: "LopHocPhan",
@@ -132,10 +150,10 @@ namespace QuanLiDiem.Migrations
                 name: "Diem");
 
             migrationBuilder.DropTable(
-                name: "LopHocPhan");
+                name: "DanhSachSinhVien");
 
             migrationBuilder.DropTable(
-                name: "DanhSachSinhVien");
+                name: "LopHocPhan");
 
             migrationBuilder.DropTable(
                 name: "GiangVien");
