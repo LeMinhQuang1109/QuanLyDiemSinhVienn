@@ -51,6 +51,4 @@ public class Diem
     [ForeignKey("MSSV")]
     public virtual DanhSachSinhVien? SinhVien { get; set; }
 
-    [ForeignKey("MaHP")]
-    public virtual LopHocPhan? LopHocPhan { get; set; }
 }
