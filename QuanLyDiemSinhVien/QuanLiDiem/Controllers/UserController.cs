@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -90,134 +91,103 @@ namespace QuanLiDiem.Controllers
 
 
         // GET: DanhSachSinhVien/Edit
-        public async Task<IActionResult> CapNhat(string? MSSV)
+        public IActionResult CapNhat()
         {
-            // Lấy MSSV từ session
-            var maSV = HttpContext.Session.GetString("MSV");
-            Console.WriteLine($"MSSV từ session: {maSV}");
+            // Lấy MSSV từ Session
+            var mssv = HttpContext.Session.GetString("MSV");
 
-            if (maSV == null)
+            if (string.IsNullOrEmpty(mssv))
             {
-                return RedirectToAction("Login", "Home");
+                return RedirectToAction("Login"); // Nếu chưa đăng nhập, chuyển hướng về trang Login
             }
 
-            // Lấy thông tin sinh viên dựa trên MSSV
-            var thongTinSV = await _context.DanhSachSinhVien
-                .FirstOrDefaultAsync(d => d.MSSV == maSV); // Tìm một sinh viên duy nhất
+            // Truy xuất thông tin sinh viên từ cơ sở dữ liệu
+            var sinhVien = _context.DanhSachSinhVien.FirstOrDefault(sv => sv.MSSV == mssv);
 
-            if (thongTinSV == null)
+            if (sinhVien == null)
             {
-                // Nếu không tìm thấy sinh viên, trả về thông báo lỗi hoặc trang phù hợp
-                return NotFound("Không tìm thấy thông tin sinh viên.");
+                return NotFound(); // Sinh viên không tồn tại
             }
 
-            // Truyền thông tin sinh viên vào view
-            return View(thongTinSV);
+            return View(sinhVien);
         }
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CapNhat(string mssv, [Bind("MSSV,HoTen,GioiTinh,CanCuocCongDan,SoDienThoai,Email,DiaChi,MaNganh,TenTaiKhoan,MatKhau,VaiTro")] DanhSachSinhVien thongTinSV)
+        public IActionResult CapNhat(DanhSachSinhVien model)
         {
-            var maSV = HttpContext.Session.GetString("MSV");
-            Console.WriteLine($"MSSV từ session: {maSV}");
+            // Lấy MSSV từ Session
+            var mssv = HttpContext.Session.GetString("MSV");
 
-            if (maSV == null)
+            if (string.IsNullOrEmpty(mssv))
             {
-                return RedirectToAction("Login", "Home");
+                return RedirectToAction("Login"); // Nếu chưa đăng nhập, chuyển hướng về trang Login
             }
 
-            if (ModelState.IsValid)
+            // Tìm sinh viên trong cơ sở dữ liệu dựa trên MSSV từ Session
+            var sinhVien = _context.DanhSachSinhVien.FirstOrDefault(sv => sv.MSSV == mssv);
+
+            if (sinhVien == null)
             {
-                try
-                {
-                    _context.Update(thongTinSV);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ThongTinSVExists(thongTinSV.MSSV))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                return NotFound(); // Sinh viên không tồn tại
             }
-            return View(thongTinSV);
-        }
-        private bool ThongTinSVExists(string mssv)
-        {
-            return _context.DanhSachSinhVien.Any(e => e.MSSV == mssv);
+
+            // Cập nhật thông tin từ model
+            sinhVien.HoTen = model.HoTen;
+            sinhVien.GioiTinh = model.GioiTinh;
+            sinhVien.CanCuocCongDan = model.CanCuocCongDan;
+            sinhVien.SoDienThoai = model.SoDienThoai;
+            sinhVien.DiaChi = model.DiaChi;
+            sinhVien.Email = model.Email;
+            sinhVien.MaNganh = model.MaNganh;
+            sinhVien.TenTaiKhoan = model.TenTaiKhoan;
+            sinhVien.MatKhau = model.MatKhau;
+
+            // Lưu thay đổi vào cơ sở dữ liệu
+            _context.SaveChanges();
+
+            // Chuyển hướng về trang chi tiết
+            return RedirectToAction("ThongTin");
         }
 
 
-        public IActionResult TimKiem(string searchTerm, string maNganh, string thongKe)
+        public IActionResult TimKiem(int? hocKy, string namHoc)
         {
-            // Lấy danh sách sinh viên từ cơ sở dữ liệu
-            var sinhViens = _context.DanhSachSinhVien.AsQueryable();
+            // Lấy MSSV từ session
+            string mssv = HttpContext.Session.GetString("MSV");
 
-            // Nếu có từ khóa tìm kiếm, lọc danh sách
-            if (!string.IsNullOrEmpty(searchTerm))
+            if (string.IsNullOrEmpty(mssv))
             {
-                sinhViens = sinhViens.Where(sv =>
-                    sv.MSSV.Contains(searchTerm) ||
-                    sv.HoTen.Contains(searchTerm));
+                return RedirectToAction("Login"); // Nếu chưa đăng nhập, chuyển hướng về trang Login
             }
 
-            // Nếu có giá trị tìm kiếm Mã ngành, lọc theo mã ngành
-            if (!string.IsNullOrEmpty(maNganh))
+            // Lọc dữ liệu theo điều kiện tìm kiếm
+            var danhSachDiem = _context.Diem.AsQueryable();
+
+            if (hocKy.HasValue)
             {
-                sinhViens = sinhViens.Where(s => s.MaNganh == maNganh);
+                danhSachDiem = danhSachDiem.Where(d => d.HocKy == hocKy);
+            }
+            if (!string.IsNullOrEmpty(namHoc))
+            {
+                danhSachDiem = danhSachDiem.Where(d => d.NamHoc == namHoc);
             }
 
-            // Lấy danh sách kết quả
-            var model = sinhViens.ToList();
+            // Lọc điểm theo MSSV (chỉ lấy điểm của sinh viên hiện tại)
+            danhSachDiem = danhSachDiem.Where(d => d.MSSV == mssv);
 
-            // Tính toán số lượng sinh viên trong mã ngành được chọn (nếu có mã ngành)
-            var totalByMaNganh = string.IsNullOrEmpty(maNganh) ? 0 : model.Count(s => s.MaNganh == maNganh);
+            // Lấy danh sách ngành học của sinh viên từ MSSV
+            var sinhVien = _context.DanhSachSinhVien
+                                    .FirstOrDefault(sv => sv.MSSV == mssv);
+            string? nganhHoc = sinhVien?.MaNganh;
 
-            // Dùng dictionary để ánh xạ mã ngành sang tên ngành
-            var maNganhToTenNganh = new Dictionary<string, string>
-            {
-                { "1", "Công nghệ thông tin" },
-                { "2", "Kinh Tế" },
-                { "3", "Cơ Khí" },
-                // Thêm mã ngành và tên ngành khác nếu cần
-            };
+            // Truyền ngành học vào View
+            ViewBag.NganhHoc = nganhHoc;
 
-            // Kiểm tra nếu mã ngành tồn tại trong dictionary
-            string tenNganh = "Không xác định"; // Giá trị mặc định nếu mã ngành không hợp lệ
-            if (!string.IsNullOrEmpty(maNganh) && maNganhToTenNganh.ContainsKey(maNganh))
-            {
-                tenNganh = maNganhToTenNganh[maNganh]; // Lấy tên ngành từ dictionary
-            }
-
-            // Thống kê số lượng sinh viên
-            ViewData["TotalStudents"] = model.Count;
-            ViewData["TenNganh"] = tenNganh;
-            ViewData["TotalByMaNganh"] = totalByMaNganh;
-
-
-            // Thêm thông báo số lượng sinh viên tham gia ngành
-            if (!string.IsNullOrEmpty(maNganh))
-            {
-                ViewData["Message"] = $"Có {totalByMaNganh} sinh viên tham gia ngành {tenNganh}.";
-            }
-
-            // Chỉ hiển thị thông báo khi nhấn nút "Thống kê"
-            if (!string.IsNullOrEmpty(thongKe))
-            {
-                ViewData["Message"] = $"Có {totalByMaNganh} sinh viên tham gia ngành {tenNganh}.";
-            }
-
-            // Trả danh sách sinh viên về view
-            return View(model);
+            // Truyền danh sách điểm vào View
+            return View(danhSachDiem.ToList());
         }
+
 
     }
 }

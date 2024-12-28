@@ -23,8 +23,11 @@ namespace QuanLiDiem.Migrations
 
             modelBuilder.Entity("Diem", b =>
                 {
-                    b.Property<string>("MSSV")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<double>("Diem10")
                         .HasColumnType("float");
@@ -45,6 +48,10 @@ namespace QuanLiDiem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("MSSV")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("MaHP")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -56,7 +63,9 @@ namespace QuanLiDiem.Migrations
                     b.Property<int>("SoTinChi")
                         .HasColumnType("int");
 
-                    b.HasKey("MSSV");
+                    b.HasKey("Id");
+
+                    b.HasIndex("MSSV");
 
                     b.ToTable("Diem");
                 });
@@ -153,7 +162,7 @@ namespace QuanLiDiem.Migrations
             modelBuilder.Entity("Diem", b =>
                 {
                     b.HasOne("QuanLiDiem.Models.DanhSachSinhVien", "SinhVien")
-                        .WithMany("Diem")
+                        .WithMany("Diems")
                         .HasForeignKey("MSSV")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -163,7 +172,7 @@ namespace QuanLiDiem.Migrations
 
             modelBuilder.Entity("QuanLiDiem.Models.DanhSachSinhVien", b =>
                 {
-                    b.Navigation("Diem");
+                    b.Navigation("Diems");
                 });
 #pragma warning restore 612, 618
         }

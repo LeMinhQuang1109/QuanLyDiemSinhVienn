@@ -5,6 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class Diem
 {
     [Key]
+    public int Id { get; set; } 
+
+    
     [Required]
     [Display(Name = "Mã số sinh viên")]
     public string MSSV { get; set; }

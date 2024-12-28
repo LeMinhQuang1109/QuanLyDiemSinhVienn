@@ -5,7 +5,7 @@
 namespace QuanLiDiem.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateTable1 : Migration
+    public partial class CreateTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -56,6 +56,8 @@ namespace QuanLiDiem.Migrations
                 name: "Diem",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     MSSV = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     MaHP = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SoTinChi = table.Column<int>(type: "int", nullable: false),
@@ -69,7 +71,7 @@ namespace QuanLiDiem.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Diem", x => x.MSSV);
+                    table.PrimaryKey("PK_Diem", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Diem_DanhSachSinhVien_MSSV",
                         column: x => x.MSSV,
@@ -77,6 +79,11 @@ namespace QuanLiDiem.Migrations
                         principalColumn: "MSSV",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Diem_MSSV",
+                table: "Diem",
+                column: "MSSV");
         }
 
         /// <inheritdoc />
