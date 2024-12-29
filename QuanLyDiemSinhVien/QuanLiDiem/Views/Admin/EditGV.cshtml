@@ -1,0 +1,35 @@
+﻿@model QuanLiDiem.Models.GiangVien
+
+<!-- Form thêm/sửa giảng viên -->
+<h4>@(Model.MaGV == null ? "Thêm giảng viên mới" : "Cập nhật giảng viên")</h4>
+<form asp-action="CreateOrEdit" method="post">
+    <div class="form-group">
+        <label for="MaGV">Mã giảng viên</label>
+        <input type="text" class="form-control" id="MaGV" name="MaGV" value="@Model.MaGV" required />
+    </div>
+
+    <div class="form-group">
+        <label for="TenGV">Tên giảng viên</label>
+        <input type="text" class="form-control" id="TenGV" name="TenGV" value="@Model.TenGV" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Email">Email</label>
+        <input type="email" class="form-control" id="Email" name="Email" value="@Model.Email" />
+    </div>
+
+    <div class="form-group">
+        <label for="SoDienThoai">Số điện thoại</label>
+        <input type="tel" class="form-control" id="SoDienThoai" name="SoDienThoai" value="@Model.SoDienThoai" />
+    </div>
+
+    <div class="form-group">
+        <label for="DiaChi">Địa chỉ</label>
+        <textarea class="form-control" id="DiaChi" name="DiaChi">@Model.DiaChi</textarea>
+    </div>
+    <div class="new button" style="margin-top: 12px">
+        <button type="submit" class="btn btn-primary">Lưu</button>
+        <button type="reset" class="btn btn-secondary">Làm mới</button>
+    </div>
+
+</form>

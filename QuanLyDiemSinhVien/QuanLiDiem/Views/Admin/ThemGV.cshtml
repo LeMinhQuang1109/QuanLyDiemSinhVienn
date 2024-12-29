@@ -1,0 +1,80 @@
+﻿@model QuanLiDiem.Models.GiangVien
+
+@{
+    ViewData["Title"] = "Quản lý giảng viên";
+    var giangViens = ViewBag.GiangViens as List<QuanLiDiem.Models.GiangVien>;
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<h2>Quản lý giảng viên</h2>
+
+<!-- Hiển thị danh sách giảng viên -->
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Mã giảng viên</th>
+            <th>Tên giảng viên</th>
+            <th>Email</th>
+            <th>Số điện thoại</th>
+            <th>Địa chỉ</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (giangViens != null && giangViens.Any())
+        {
+            foreach (var gv in giangViens)
+            {
+                <tr>
+                    <td>@gv.MaGV</td>
+                    <td>@gv.TenGV</td>
+                    <td>@gv.Email</td>
+                    <td>@gv.SoDienThoai</td>
+                    <td>@gv.DiaChi</td>
+                    <td>
+                        <a asp-action="EditGV" asp-route-id="@gv.MaGV" class="btn btn-primary">Sửa</a>
+                        <a asp-action="Delete" asp-route-id="@gv.MaGV" class="btn btn-danger btn-sm">Xóa</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center">Không có dữ liệu</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr />
+
+
+<script>
+    // Script để điền dữ liệu vào form khi bấm nút "Sửa"
+    function editGV(maGV, tenGV, email, soDienThoai, diaChi) {
+        document.getElementById('MaGV').value = maGV;
+        document.getElementById('MaGV').readOnly = true; // Không cho sửa mã
+        document.getElementById('TenGV').value = tenGV;
+        document.getElementById('Email').value = email;
+        document.getElementById('SoDienThoai').value = soDienThoai;
+        document.getElementById('DiaChi').value = diaChi;
+    }
+
+    // Script để làm mờ thông báo sau 3 giây
+    document.addEventListener("DOMContentLoaded", function () {
+        const errorMessage = document.getElementById("errorMessage");
+        if (errorMessage) {
+            setTimeout(() => {
+                errorMessage.style.transition = "opacity 1s ease"; // Thời gian chuyển đổi
+                errorMessage.style.opacity = 0; // Làm mờ dần
+                setTimeout(() => errorMessage.remove(), 1000); // Xóa hẳn khỏi DOM sau khi làm mờ
+            }, 3000); // Bắt đầu sau 3 giây
+        }
+    });
+</script>
