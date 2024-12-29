@@ -48,7 +48,6 @@ public class Diem
     [Display(Name = "Năm học")]
     public string NamHoc { get; set; }
 
-    [ForeignKey("MSSV")]
-    public virtual DanhSachSinhVien? SinhVien { get; set; }
+   
 
 }

@@ -23,12 +23,7 @@ namespace QuanLiDiem.Data
             // Định nghĩa khóa chính cho bảng DanhSachSinhVien
             modelBuilder.Entity<DanhSachSinhVien>()
                 .HasKey(sv => sv.MSSV); // Chỉ định MSSV là khóa chính
-            // Thiết lập quan hệ giữa Diem và DanhSachSinhVien
-            modelBuilder.Entity<Diem>()
-            .HasOne(d => d.SinhVien)
-            .WithMany(s => s.Diems)
-            .HasForeignKey(d => d.MSSV)
-            .OnDelete(DeleteBehavior.Cascade);
+            
 
             modelBuilder.Entity<GiangVien>(entity =>
             {
