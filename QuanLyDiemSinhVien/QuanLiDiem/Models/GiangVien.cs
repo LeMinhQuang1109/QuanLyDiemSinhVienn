@@ -1,11 +1,13 @@
 ﻿using QuanLiDiem.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace QuanLiDiem.Models;
 
 public partial class GiangVien
 {
+    [Key]
     public string MaGV { get; set; } = null!;
 
     public string TenGV { get; set; } = null!;

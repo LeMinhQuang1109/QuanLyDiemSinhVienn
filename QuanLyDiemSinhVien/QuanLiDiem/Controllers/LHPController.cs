@@ -18,7 +18,7 @@ namespace QuanLiDiem.Controllers
 
 
         // Action để hiển thị danh sách lớp học phần
-        public IActionResult Index()
+        public IActionResult DSLopHP()
         {
             // Lấy danh sách lớp học phần từ database
             var lopHocPhans = _context.LopHocPhans.Include(lhp => lhp.MaGVNavigation).ToList();
@@ -100,7 +100,6 @@ namespace QuanLiDiem.Controllers
             {
                 search = search.ToLower();
                 data = data.Where(lhp =>
-                    lhp.MaHP.ToLower().Contains(search) ||
                     lhp.TenHP.ToLower().Contains(search) ||
                     lhp.MaGV.ToLower().Contains(search) ||
                     (lhp.MaGVNavigation.TenGV != null &&
@@ -277,4 +276,3 @@ namespace QuanLiDiem.Controllers
         }
     }
 }
-

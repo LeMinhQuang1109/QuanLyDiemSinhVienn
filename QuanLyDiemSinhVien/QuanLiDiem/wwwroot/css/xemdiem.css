@@ -1,0 +1,66 @@
+﻿/* Thiết lập cho bảng */
+.table {
+    background-color: aliceblue;
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    border-collapse: collapse;
+}
+
+/* Định dạng cho header bảng */
+.table-dark th {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+}
+
+/* Định dạng cho các ô trong bảng */
+.table td, .table th {
+    padding: 10px 15px; /* Thêm khoảng cách trong các ô */
+    vertical-align: middle;
+    border: 1px solid #ddd; /* Đường viền nhẹ giữa các ô */
+}
+
+/* Hover hiệu ứng khi rê chuột qua dòng */
+.table-hover tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Định dạng cho các nút trong bảng */
+.btn {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Tạo khoảng cách giữa các nút và các phần tử khác */
+a.btn {
+    margin-right: 5px;
+}
+
+/* Định dạng riêng cho nút chỉnh sửa */
+.btn-warning {
+    background-color: #ffc107;
+    color: white;
+    border-color: #ffc107;
+}
+
+    .btn-warning:hover {
+        background-color: #e0a800;
+        border-color: #e0a800;
+    }
+
+/* Định dạng cho các dòng trong bảng khi không có dữ liệu */
+.table-empty {
+    text-align: center;
+    font-style: italic;
+    color: #6c757d;
+}
+
+/* Cải thiện responsive cho bảng trên thiết bị di động */
+@media (max-width: 768px) {
+    .table th, .table td {
+        padding: 8px;
+        font-size: 12px;
+    }
+}

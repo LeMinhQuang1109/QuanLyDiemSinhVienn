@@ -48,6 +48,5 @@ public class Diem
     [Display(Name = "Năm học")]
     public string NamHoc { get; set; }
 
-   
 
 }

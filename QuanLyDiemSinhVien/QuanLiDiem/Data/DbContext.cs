@@ -15,11 +15,15 @@ namespace QuanLiDiem.Data
         public DbSet<Diem> Diem { get; set; } = default!;
         public DbSet<GiangVien> GiangViens { get; set; }
         public DbSet<LopHocPhan> LopHocPhans { get; set; }
+        public DbSet<SinhVien_HocPhan> SinhViens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<LopHocPhan>().HasKey(sv => sv.MaHP);
+
+            modelBuilder.Entity<SinhVien_HocPhan>().HasKey(sv => sv.Id);
             // Định nghĩa khóa chính cho bảng DanhSachSinhVien
             modelBuilder.Entity<DanhSachSinhVien>()
                 .HasKey(sv => sv.MSSV); // Chỉ định MSSV là khóa chính

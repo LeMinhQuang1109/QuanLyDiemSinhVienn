@@ -75,11 +75,9 @@ namespace QuanLiDiem.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CanCuocCongDan")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DiaChi")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -98,7 +96,6 @@ namespace QuanLiDiem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SoDienThoai")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TenTaiKhoan")
@@ -236,6 +233,31 @@ namespace QuanLiDiem.Migrations
                     b.ToTable("DanhSachDK");
                 });
 
+            modelBuilder.Entity("QuanLiDiem.Models.SinhVien_HocPhan", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("MaHP")
+                        .IsRequired()
+                        .HasColumnType("char(10)");
+
+                    b.Property<string>("SinhVienId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MaHP");
+
+                    b.HasIndex("SinhVienId");
+
+                    b.ToTable("SinhViens");
+                });
+
             modelBuilder.Entity("QuanLiDiem.Models.LopHocPhan", b =>
                 {
                     b.HasOne("QuanLiDiem.Models.GiangVien", "MaGVNavigation")
@@ -244,6 +266,30 @@ namespace QuanLiDiem.Migrations
                         .HasConstraintName("FK__LopHocPhan__MaGV__5165187F");
 
                     b.Navigation("MaGVNavigation");
+                });
+
+            modelBuilder.Entity("QuanLiDiem.Models.SinhVien_HocPhan", b =>
+                {
+                    b.HasOne("QuanLiDiem.Models.LopHocPhan", "LopHocPhan")
+                        .WithMany()
+                        .HasForeignKey("MaHP")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("QuanLiDiem.Models.DanhSachSinhVien", "SinhVien")
+                        .WithMany("SinhVienHocPhans")
+                        .HasForeignKey("SinhVienId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("LopHocPhan");
+
+                    b.Navigation("SinhVien");
+                });
+
+            modelBuilder.Entity("QuanLiDiem.Models.DanhSachSinhVien", b =>
+                {
+                    b.Navigation("SinhVienHocPhans");
                 });
 
             modelBuilder.Entity("QuanLiDiem.Models.GiangVien", b =>

@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chỉnh sửa Lớp Học Phần</title>
+    <link href="~/css/taolopHP.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="create-info">
+        <h2 class="text-center">Chỉnh sửa Lớp Học Phần</h2>
+        
+        <div class="thong-bao" style="margin-top: 12px">
+            @if (TempData["EditSuccessMessage"] != null)
+            {
+                <div id="success-alert" class="alert alert-success alert-dismissible fade show">
+                    @TempData["EditSuccessMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            @if (TempData["EditErrorMessage"] != null)
+            {
+                <div id="error-alert" class="alert alert-danger alert-dismissible fade show">
+                    @TempData["EditErrorMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            @if (TempData["DayErrorMessage"] != null)
+            {
+                <div id="day-error-alert" class="alert alert-danger alert-dismissible fade show">
+                    @TempData["DayErrorMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+        </div>
+
+        
+        <form method="post">
+            <hr />
+            <input type="hidden" name="MaHP" value="@Model.MaHP" />
+            <div class="form-group">
+                <label for="TenHP">Tên Lớp:</label>
+                <input type="text" class="form-control" id="TenHP" name="TenHP"
+                       value="@Model.TenHP" placeholder="Nhập tên lớp học phần (nếu muốn thay đổi)" />
+            </div>
+
+            <div class="form-group">
+                <label for="MaGV">Mã Giảng Viên:</label>
+                <select class="form-control" id="MaGV" name="MaGV" onchange="updateTenGV(this)">
+                    <option value="">-- Chọn Mã Giảng Viên --</option>
+                    @foreach (var gv in ViewBag.GiangVienList)
+                    {
+                        <option value="@gv.MaGV" data-ten-gv="@gv.TenGV">@gv.MaGV</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="TenGV">Tên Giảng Viên:</label>
+                <input type="text" class="form-control" id="TenGV" name="TenGV" readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="NgayBatDau">Ngày Bắt Đầu:</label>
+                <input type="date" class="form-control" id="NgayBatDau" name="NgayBatDau"
+                       value="@Model.NgayBatDau?.ToString("yyyy-MM-dd")" />
+            </div>
+
+            <div class="form-group">
+                <label for="NgayKetThuc">Ngày Kết Thúc:</label>
+                <input type="date" class="form-control" id="NgayKetThuc" name="NgayKetThuc"
+                       value="@Model.NgayKetThuc?.ToString("yyyy-MM-dd")" />
+            </div>
+
+            <div class="form-group">
+                <label for="GhiChu">Ghi Chú:</label>
+                <textarea class="form-control" id="GhiChu" name="GhiChu"
+                          placeholder="Nhập ghi chú (nếu muốn thay đổi)">@Model.GhiChu</textarea>
+            </div>
+
+            <div class="button">
+                <a href="@Url.Action("DSLopHp", "Admin")" class="btn btn-secondary">Quay lại</a>
+                <button type="submit" class="btn btn-success">Lưu</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        function updateTenGV(selectElement) {
+            // Lấy giá trị của option được chọn
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+
+            // Lấy dữ liệu tên giảng viên từ thuộc tính data-ten-gv
+            const tenGV = selectedOption.getAttribute("data-ten-gv") || "";
+
+            // Gán giá trị vào ô input TenGV
+            const tenGVInput = document.getElementById("TenGV");
+            if (tenGVInput) {
+                tenGVInput.value = tenGV;
+            }
+        }
+
+        setTimeout(function () {
+            // Đóng tất cả alert sau 3 giây
+            var alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                var bootstrapAlert = new bootstrap.Alert(alert);
+                bootstrapAlert.close();
+            });
+        }, 500);
+    </script>
+</body>
+</html>

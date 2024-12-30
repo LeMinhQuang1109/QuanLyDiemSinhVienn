@@ -1,0 +1,100 @@
+﻿@model Diem
+
+@{
+    ViewData["Title"] = "Nhập điểm";
+}
+<link href="~/css/capnhattt.css" rel="stylesheet" />
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-sm-12">
+            <form asp-action="NhapDiem" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <input type="hidden" asp-for="MSSV" /> <!-- Đảm bảo sử dụng MSSV là khóa chính -->
+                <h4 class="text-center">Nhập điểm sinh viên</h4>
+                <hr />
+
+                <div class="row">
+                    <!-- Cột trái (bảng 1) -->
+                    <div class="col-md-6">
+                        <!-- MSSV -->
+                        <div class="form-group row mb-3 align-items-center">
+                            <label asp-for="MSSV" class="col-sm-4 col-form-label">Mã số sinh viên</label>
+                            <div class="col-sm-8">
+                                <input asp-for="MSSV" class="form-control" readonly />
+                            </div>
+                        </div>
+
+
+                        <!-- NamHoc -->
+                        <div class="form-group row mb-3 align-items-center">
+                            <label asp-for="MaHP" class="col-sm-4 col-form-label">Mã học phần</label>
+                            <div class="col-sm-8">
+                                <input asp-for="MaHP" class="form-control" />
+                            </div>
+                        </div>
+
+                        <!-- SoTinChi -->
+                        <div class="form-group row mb-3 align-items-center">
+                            <label asp-for="SoTinChi" class="col-sm-4 col-form-label">Số tín chỉ</label>
+                            <div class="col-sm-8">
+                                <input asp-for="SoTinChi" class="form-control" />
+                            </div>
+                        </div>
+
+                        <!-- HocKy -->
+                        <div class="form-group row mb-3 align-items-center">
+                            <label asp-for="HocKy" class="col-sm-4 col-form-label">Học kỳ</label>
+                            <div class="col-sm-8">
+                                <input asp-for="HocKy" class="form-control" />
+                            </div>
+                        </div>
+
+                        <!-- NamHoc -->
+                        <div class="form-group row mb-3 align-items-center">
+                            <label asp-for="NamHoc" class="col-sm-4 col-form-label">Năm học</label>
+                            <div class="col-sm-8">
+                                <input asp-for="NamHoc" class="form-control" />
+                            </div>
+                        </div>
+
+                        
+                    </div>
+
+                    <!-- Cột phải (bảng 2) -->
+                    <div class="col-md-6">
+                        <!-- DiemCuoiKy -->
+                        <div class="form-group row mb-3 align-items-center">
+                            <label asp-for="DiemCuoiKy" class="col-sm-4 col-form-label">Điểm cuối kỳ</label>
+                            <div class="col-sm-8">
+                                <input asp-for="DiemCuoiKy" class="form-control" />
+                            </div>
+                        </div>
+                        <!-- DiemQuaTrinh -->
+                    <div class="form-group row mb-3 align-items-center">
+                        <label asp-for="DiemQuaTrinh" class="col-sm-4 col-form-label">Điểm quá trình</label>
+                        <div class="col-sm-8">
+                            <input asp-for="DiemQuaTrinh" class="form-control" />
+                        </div>
+                    </div>
+                      
+                       
+                    </div>
+                </div>
+
+                <!-- Save Button -->
+                <div class="form-group row mt-4">
+                    <div class="col-sm-12 text-center">
+                        <a asp-controller="GiangVien" asp-action="DSSV" class="btn btn-secondary" asp-route-maHP="2411050330" style="height: 45px; text-align: center">Quay lại </a>
+                        <input type="submit" value="Lưu" style="width:100px" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

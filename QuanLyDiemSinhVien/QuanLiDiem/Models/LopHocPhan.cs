@@ -6,6 +6,7 @@ namespace QuanLiDiem.Models;
 
 public partial class LopHocPhan
 {
+    [Key]
     public string MaHP { get; set; } = null!;
 
     public string TenHP { get; set; } = null!;
@@ -19,4 +20,5 @@ public partial class LopHocPhan
     public string? GhiChu { get; set; }
 
     public virtual GiangVien? MaGVNavigation { get; set; }
+
 }

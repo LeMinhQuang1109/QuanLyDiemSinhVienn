@@ -19,46 +19,106 @@ namespace QuanLiDiem.Controllers
             _context = context;
         }
 
-        public IActionResult Index2(string searchTerm)
+
+        [HttpGet]
+        public async Task<IActionResult> DKHP()
         {
-            // Lấy danh sách sinh viên từ cơ sở dữ liệu
-            var sinhViens = _context.DanhSachSinhVien.AsQueryable();
+            // Lấy danh sách các lớp học phần có sẵn
+            var danhSachLopHocPhan = await _context.LopHocPhans.ToListAsync();
 
-            // Nếu có từ khóa tìm kiếm, lọc danh sách
-            if (!string.IsNullOrEmpty(searchTerm))
-            {
-                sinhViens = sinhViens.Where(sv =>
-                    sv.MSSV.Contains(searchTerm) ||
-                    sv.HoTen.Contains(searchTerm));
-            }
-
-            // Truyền từ khóa tìm kiếm vào ViewData để giữ lại trong ô tìm kiếm
-            ViewData["SearchTerm"] = searchTerm;
-
-            // Trả danh sách sinh viên về view
-            return View(sinhViens.ToList());
-        }
-
-        // GET: Diems
-        public IActionResult Index()
-        {
-            // Lấy MSSV từ session
+            // Lấy mã sinh viên từ Session
             var maSV = HttpContext.Session.GetString("MSV");
 
             if (maSV == null)
             {
-                // Nếu MSSV không tồn tại trong session, điều hướng về trang đăng nhập
+                TempData["ErrorMessage"] = "Vui lòng đăng nhập.";
                 return RedirectToAction("Login", "Home");
             }
 
-            // Lấy danh sách điểm của sinh viên dựa trên MSSV
-            var danhSachDiem = _context.Diem
-                .Where(d => d.MSSV == maSV.ToString()) // MSSV trong cơ sở dữ liệu là kiểu string
-                .ToList();
-
-            // Truyền danh sách điểm vào view
-            return View(danhSachDiem);
+            // Truyền danh sách lớp học phần vào View
+            return View(danhSachLopHocPhan);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DKHP(string maHP)
+        {
+            var maSV = HttpContext.Session.GetString("MSV");
+
+            if (maSV == null)
+            {
+                TempData["ErrorMessage"] = "Vui lòng đăng nhập.";
+                return RedirectToAction("Login", "Home");
+            }
+
+            // Kiểm tra xem sinh viên có tồn tại trong bảng DanhSachSinhVien hay không
+            var sinhVien = await _context.DanhSachSinhVien.FirstOrDefaultAsync(sv => sv.MSSV == maSV);
+            if (sinhVien == null)
+            {
+                TempData["ErrorMessage"] = "Sinh viên không tồn tại.";
+                return RedirectToAction("DKHP");
+            }
+
+            // Kiểm tra xem sinh viên đã đăng ký lớp học phần này chưa
+            var existingRegistration = await _context.SinhViens
+                .FirstOrDefaultAsync(dk => dk.MaHP == maHP && dk.SinhVienId == maSV);
+
+            if (existingRegistration != null)
+            {
+                TempData["ErrorMessage"] = "Bạn đã đăng ký lớp học phần này rồi!";
+                return RedirectToAction("DKHP");
+            }
+
+            // Kiểm tra xem lớp học phần có tồn tại không
+            var lopHocPhan = await _context.LopHocPhans.FirstOrDefaultAsync(lh => lh.MaHP == maHP);
+            if (lopHocPhan == null)
+            {
+                TempData["ErrorMessage"] = "Lớp học phần không tồn tại.";
+                return RedirectToAction("DKHP");
+            }
+
+            // Tạo mới bản ghi trong bảng SinhVien_HocPhan
+            var dangKyHocPhan = new SinhVien_HocPhan
+            {
+                SinhVienId = maSV,  // Sử dụng SinhVienId thay cho MSSV
+                MaHP = maHP,
+            };
+
+            _context.SinhViens.Add(dangKyHocPhan); // Đảm bảo thêm vào bảng SinhVien_HocPhan
+
+            // Lưu thay đổi vào cơ sở dữ liệu
+            try
+            {
+                int result = await _context.SaveChangesAsync();
+                if (result > 0)
+                {
+                    TempData["SuccessMessage"] = "Đăng ký lớp học phần thành công!";
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Đã có lỗi xảy ra trong quá trình đăng ký.";
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Lỗi khi đăng ký lớp học phần: {ex.Message}";
+                if (ex.InnerException != null)
+                {
+                    TempData["ErrorMessage"] += $" Inner Exception: {ex.InnerException.Message}";
+                }
+            }
+
+            return RedirectToAction("DKHP");
+        }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -188,6 +248,6 @@ namespace QuanLiDiem.Controllers
             return View(danhSachDiem.ToList());
         }
 
-
     }
 }
+

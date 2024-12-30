@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản Lí Lớp Học Phần</title>
+    <link href="~/css/taolopHP.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="create-info">
+        <h2 class="text-center">Tạo Lớp Học Phần</h2>
+
+        <div class="thong-bao" style="margin-top: 12px">
+            @if (TempData["EditSuccessMessage"] != null)
+            {
+                <div id="success-alert" class="alert alert-success alert-dismissible fade show">
+                    @TempData["EditSuccessMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            @if (TempData["EditErrorMessage"] != null)
+            {
+                <div id="error-alert" class="alert alert-danger alert-dismissible fade show">
+                    @TempData["EditErrorMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            @if (TempData["DayErrorMessage"] != null)
+            {
+                <div id="day-error-alert" class="alert alert-danger alert-dismissible fade show">
+                    @TempData["DayErrorMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+        </div>
+           
+        <form asp-action="TaoLHP" method="post">
+            <hr />
+            <div class="form-group">
+                <label for="TenHP">Tên Lớp Học Phần:</label>
+                <input id="TenHP" class=" form-control"  type="text" name="TenHP"/>
+            </div>
+            <div class="form-group">
+                <label for="MaHP">Mã lớp học phần:</label>
+                <input id="MaHP" type="text" name="MaHP" class="form-control" readonly value="@Model?.MaHP 2411050" "" />
+
+
+            </div>
+            <div class="form-group">
+                <label for="MaGV">Mã Giảng Viên:</label>
+                <select class="form-control" id="MaGV" name="MaGV" onchange="updateTenGV(this)">
+                    <option value="">-- Chọn Mã Giảng Viên --</option>
+                    @foreach (var gv in ViewBag.GiangVienList)
+                    {
+                        <option value="@gv.MaGV" data-ten-gv="@gv.TenGV">@gv.MaGV</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="TenGV">Tên Giảng Viên:</label>
+                <input type="text" class="form-control" id="TenGV" name="TenGV" readonly />
+            </div>
+            <div class="form-group">
+                <label class="time">Thời Gian Học:</label>
+                <div class="time-group">
+                    <input class="start-time" type="date" name="NgayBatDau" />
+                    <input class="end-time" type="date" name="NgayKetThuc" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="GhiChu">Ghi chú:</label>
+                <textarea id="GhiChu" name="GhiChu" class="form-control"></textarea>
+            </div>
+            <div class="button">
+                <a asp-controller="Admin" asp-action="DSLopHP" class="btn btn-secondary">Quay lại</a>
+                <button class="btn btn-success" type="submit">Xác nhận tạo lớp</button>
+            </div>
+        </form>
+    </div>
+
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+    <script>
+        function updateTenGV(selectElement) {
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const tenGV = selectedOption.getAttribute("data-ten-gv") || "";
+            const tenGVInput = document.getElementById("TenGV");
+            if (tenGVInput) {
+                tenGVInput.value = tenGV;
+            }
+        }
+
+        const startTimeInput = document.getElementById("start-time");
+        const endTimeInput = document.getElementById("end-time");
+
+        endTimeInput.addEventListener("change", function () {
+            const startDate = new Date(startTimeInput.value);
+            const endDate = new Date(endTimeInput.value);
+
+            if (endDate < startDate) {
+                showError("Lỗi: Ngày kết thúc không thể trước ngày bắt đầu!");
+                endTimeInput.value = "";
+            }
+        });
+
+        setTimeout(function () {
+            // Đóng tất cả alert sau 3 giây
+            var alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                var bootstrapAlert = new bootstrap.Alert(alert);
+                bootstrapAlert.close();
+            });
+        }, 500);
+    </script>
+</body>
+</html>

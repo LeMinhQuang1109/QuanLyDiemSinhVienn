@@ -30,8 +30,6 @@ public class HomeController : Controller
             // Bỏ qua kiểm tra tên tài khoản đã tồn tại, thêm trực tiếp người dùng vào cơ sở dữ liệu
             _context.Add(registration);
             await _context.SaveChangesAsync();
-
-            TempData["SuccessMessage"] = "Đăng ký thành công, vui lòng đăng nhập.";
             return RedirectToAction("Login");
         }
         return View(registration);
@@ -49,6 +47,8 @@ public class HomeController : Controller
     {
         if (ModelState.IsValid)
         {
+           
+
             var user = _context.DanhSachSinhVien
                 .FirstOrDefault(u => u.TenTaiKhoan == login.TenTaiKhoan && u.MatKhau == login.MatKhau);
 
@@ -69,7 +69,7 @@ public class HomeController : Controller
                 }
                 else if (user.VaiTro == "GiangVien")
                 {
-                    return RedirectToAction("TimKiem", "GiangVien");
+                    return RedirectToAction("Index", "GiangVien");
                 }
                 else
                 {

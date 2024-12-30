@@ -42,27 +42,23 @@ namespace qlydiem.Controllers
             return View(diem);
         }
 
-        // GET: Diems/Create
-        // GET: Diems/Create/MSSV
-        // GET: Diems/Create/{MSSV}
-        public IActionResult Create(string mssv)
+        public IActionResult NhapDiem(string searchTerm)
         {
-            if (string.IsNullOrEmpty(mssv))
-            {
-                return NotFound();
-            }
+            var danhSachSinhVien = _context.DanhSachSinhVien
+                .Where(sv => string.IsNullOrEmpty(searchTerm) || sv.MSSV.Contains(searchTerm) || sv.HoTen.Contains(searchTerm))
+                .ToList();
 
-            // Kiểm tra xem sinh viên đã có điểm chưa
-            
+            var danhSachMaHP = _context.LopHocPhans.Select(lhp => lhp.MaHP).ToList();
 
-            // Tạo đối tượng Diem mới và gán MSSV từ query string
-            var diem = new Diem
-            {
-                MSSV = mssv
-            };
+            // Sử dụng ViewBag để truyền dữ liệu
+            ViewBag.DanhSachSinhVien = new SelectList(danhSachSinhVien, "MSSV", "HoTen");
+            ViewBag.DanhSachMaHP = new SelectList(danhSachMaHP);
 
-            return View();  // Truyền đối tượng diem vào view
+            var model = new Diem();  // Tạo model trống hoặc lấy từ database
+            return View(model);
         }
+
+
 
 
 
@@ -89,7 +85,7 @@ namespace qlydiem.Controllers
             diem.KetQua = diem.Diem10 >= 4.0 ? "Đạt" : "Không đạt";
             _context.Add(diem);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "TimKiem");
+            return RedirectToAction("GiangVien", "DSSV");
         }
 
         // GET: Diems/Edit/5
@@ -147,8 +143,6 @@ namespace qlydiem.Controllers
                 }
             }
             return RedirectToAction(nameof(Index));
-
-            return View(diem);
         }
 
         // GET: Diems/Delete/5

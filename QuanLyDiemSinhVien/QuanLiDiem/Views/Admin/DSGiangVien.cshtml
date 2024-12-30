@@ -1,0 +1,67 @@
+﻿@model List<QuanLiDiem.Models.GiangVien>
+
+    <link href="~/css/DSLopHP.css" rel="stylesheet" />
+@{
+    ViewData["Title"] = "Quản lý giảng viên";
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" id="errorMessage">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" id="successMessage">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<h2 class="my-4">Quản lý giảng viên</h2>
+<a asp-controller="Admin" asp-action="DuyetSV" class="btn btn-secondary">Quay lại</a>
+<hr />
+<!-- Hiển thị danh sách giảng viên -->
+<table id="lopHocPhanTable" class="display">
+    <thead>
+        <tr>
+            <th>Mã giảng viên</th>
+            <th>Tên giảng viên</th>
+            <th>Email</th>
+            <th>Số điện thoại</th>
+            <th>Địa chỉ</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var gv in Model)
+            {
+                <tr>
+                    <td>@gv.MaGV</td>
+                    <td>@gv.TenGV</td>
+                    <td>@gv.Email</td>
+                    <td>@gv.SoDienThoai</td>
+                    <td>@gv.DiaChi</td>
+                    <td>
+                        <!-- Nút xóa -->
+                        <form asp-action="XoaGiangVien" method="post" style="display:inline;">
+                            <input type="hidden" name="maGV" value="@gv.MaGV" />
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa giảng viên này không?')">
+                                Xóa
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center">Không có dữ liệu</td>
+            </tr>
+        }
+    </tbody>
+</table>

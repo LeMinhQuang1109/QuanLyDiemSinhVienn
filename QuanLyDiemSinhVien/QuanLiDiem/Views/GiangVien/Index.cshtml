@@ -1,0 +1,86 @@
+﻿@model IEnumerable<QuanLiDiem.Models.LopHocPhan>
+
+@{
+    ViewData["Title"] = "Danh sách sinh viên";
+}
+@if (TempData["ErrorMessage"] != null)
+
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+<link href="~/css/searchCss.css" rel="stylesheet" />
+
+<!-- Tiêu đề trang -->
+
+
+<div class="search-form-container">
+
+    <!-- Form tìm kiếm -->
+    <form asp-action="Index" method="get" class="form">
+        <h2 class="text-center">Danh sách lớp học phần</h2>
+        <hr />
+        <div class="form-group d-flex align-items-center">
+            <!-- Tìm kiếm lớp học phần -->
+            <div class="input-group" style="margin-right: 20px;">
+                <input type="text" name="searchTerm" id="searchTerm" 
+                       placeholder="Tìm kiếm theo Mã HP hoặc Tên HP..." value="@ViewData["SearchTerm"]"
+                       style="height: 45px; border-radius: 10px; width: 300px;border: 1px solid #ced4da;" />
+                <button type="submit" style="margin-left: 10px; border: none; border-radius: 10px; padding: 5px 10px; background-color: antiquewhite">
+                    Tìm kiếm
+                </button>
+            </div>
+        </div>
+
+        <!-- Thông báo -->
+        @if (ViewData["Message"] != null)
+        {
+            <div class="container mt-3">
+                <div class="alert alert-info">
+                    @ViewData["Message"]
+                </div>
+            </div>
+        }
+
+        <!-- Bảng hiển thị danh sách lớp học phần -->
+        <table class="table table-bordered table-hover mt-3">
+            <thead>
+                <tr>
+                    <th style="text-align: center; background-color: bisque;">Mã HP</th>
+                    <th style="text-align: center; background-color: bisque;">Tên HP</th>
+                    <th style="text-align: center; background-color: bisque;">Ngày tạo</th>
+                    <th style="text-align: center; background-color: bisque;">Ngày bắt đầu</th>
+                    <th style="text-align: center; background-color: bisque;">Ngày kết thúc</th>
+                    <th style="text-align: center; background-color: bisque;">Ghi chú</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Any())
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="padding-left: 10px;">@Html.DisplayFor(modelItem => item.MaHP)</td>
+                            <td style="padding-left: 10px; color: blue">
+                                <a asp-controller="GiangVien" asp-action="DSSV" asp-route-maHP="@item.MaHP" style="text-decoration: none; color: inherit;">
+                                    @Html.DisplayFor(modelItem => item.TenHP)
+                                </a>
+                            </td>
+                            <td style="text-align: center;">@Html.DisplayFor(modelItem => item.NgayTao)</td>
+                            <td style="text-align: center;">@Html.DisplayFor(modelItem => item.NgayBatDau)</td>
+                            <td style="text-align: center;">@Html.DisplayFor(modelItem => item.NgayKetThuc)</td>
+                            <td style="padding-left: 10px;">@Html.DisplayFor(modelItem => item.GhiChu)</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7" class="text-center">Không tìm thấy lớp học phần nào.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </form>
+</div>

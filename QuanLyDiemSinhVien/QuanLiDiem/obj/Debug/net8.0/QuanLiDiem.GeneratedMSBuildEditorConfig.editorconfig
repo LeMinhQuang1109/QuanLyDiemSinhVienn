@@ -17,111 +17,127 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = QuanLiDiem
 build_property.RootNamespace = QuanLiDiem
-build_property.ProjectDir = C:\Users\PC\source\repos\QuanLyDiemSinhVienn\QuanLyDiemSinhVien\QuanLiDiem\
+build_property.ProjectDir = D:\GITHUB\QuanLyDiemSinhVien\QuanLiDiem\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\PC\source\repos\QuanLyDiemSinhVienn\QuanLyDiemSinhVien\QuanLiDiem
+build_property.MSBuildProjectDirectory = D:\GITHUB\QuanLyDiemSinhVien\QuanLiDiem
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/Admin/Details.cshtml]
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/Admin/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/Admin/DuyetSV.cshtml]
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/Admin/DSGiangVien.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRFNHaWFuZ1ZpZW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/Admin/DSLopHP.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRFNMb3BIUC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/Admin/DuyetSV.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRHV5ZXRTVi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/Diems/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGllbXNcQ3JlYXRlLmNzaHRtbA==
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/Admin/EditGV.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdEdWLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/Diems/Delete.cshtml]
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/Admin/SuaLHP.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU3VhTEhQLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/Admin/TaoLHP.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVGFvTEhQLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/Admin/TimKiem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVGltS2llbS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/Diems/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGllbXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/Diems/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGllbXNcRWRpdC5jc2h0bWw=
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/GiangVien/DiemSV.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lhbmdWaWVuXERpZW1TVi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/GiangVien/CreateGV.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lhbmdWaWVuXENyZWF0ZUdWLmNzaHRtbA==
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/GiangVien/DSSV.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lhbmdWaWVuXERTU1YuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/GiangVien/TimKiem.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lhbmdWaWVuXFRpbUtpZW0uY3NodG1s
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/GiangVien/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lhbmdWaWVuXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/Home/ChangePassword.cshtml]
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/GiangVien/NhapDiem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lhbmdWaWVuXE5oYXBEaWVtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/GiangVien/SuaDiem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lhbmdWaWVuXFN1YURpZW0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/Home/ChangePassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDaGFuZ2VQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/Home/Index.cshtml]
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/Home/Login.cshtml]
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/Home/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/Home/Privacy.cshtml]
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/Home/Register.cshtml]
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/Home/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/LopHocPhan/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9wSG9jUGhhblxDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/LopHocPhan/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9wSG9jUGhhblxFZGl0LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/LopHocPhan/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9wSG9jUGhhblxJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/Shared/Error.cshtml]
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/User/CapNhat.cshtml]
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/User/CapNhat.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxDYXBOaGF0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/User/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleC5jc2h0bWw=
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/User/DKHP.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxES0hQLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/User/Index2.cshtml]
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/User/Index2.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleDIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/User/ThongTin.cshtml]
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/User/ThongTin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxUaG9uZ1Rpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/User/TimKiem.cshtml]
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/User/TimKiem.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxUaW1LaWVtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/_ViewImports.cshtml]
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/_ViewStart.cshtml]
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/source/repos/QuanLyDiemSinhVienn/QuanLyDiemSinhVien/QuanLiDiem/Views/Shared/_Layout.cshtml]
+[D:/GITHUB/QuanLyDiemSinhVien/QuanLiDiem/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-uithskufes

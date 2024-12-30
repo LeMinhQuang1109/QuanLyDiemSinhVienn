@@ -2,7 +2,7 @@
 
 <!-- Form thêm/sửa giảng viên -->
 <h4>@(Model.MaGV == null ? "Thêm giảng viên mới" : "Cập nhật giảng viên")</h4>
-<form asp-action="CreateOrEdit" method="post">
+<form asp-action="SuaLHP" method="post">
     <div class="form-group">
         <label for="MaGV">Mã giảng viên</label>
         <input type="text" class="form-control" id="MaGV" name="MaGV" value="@Model.MaGV" required />
