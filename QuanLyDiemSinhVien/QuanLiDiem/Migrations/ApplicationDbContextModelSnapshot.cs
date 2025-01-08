@@ -64,6 +64,10 @@ namespace QuanLiDiem.Migrations
                     b.Property<int>("SoTinChi")
                         .HasColumnType("int");
 
+                    b.Property<string>("TenHP")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Diem");
@@ -126,6 +130,9 @@ namespace QuanLiDiem.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("MatKhau")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SoDienThoai")
                         .HasMaxLength(10)
                         .IsUnicode(false)
@@ -138,10 +145,44 @@ namespace QuanLiDiem.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("TenGV");
 
+                    b.Property<string>("TenTaiKhoan")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VaiTro")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("MaGV")
                         .HasName("PK__GiangVie__2725AEF38D82FDC2");
 
                     b.ToTable("GiangVien", (string)null);
+                });
+
+            modelBuilder.Entity("QuanLiDiem.Models.GiangVienRegister", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("DiaChi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SDT")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TenGV")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GiangVienRegisters");
                 });
 
             modelBuilder.Entity("QuanLiDiem.Models.LopHocPhan", b =>
@@ -209,6 +250,10 @@ namespace QuanLiDiem.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("DiaChi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GioiTinh")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

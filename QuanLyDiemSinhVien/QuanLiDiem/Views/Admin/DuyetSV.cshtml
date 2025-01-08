@@ -12,6 +12,7 @@
     @model IEnumerable<QuanLiDiem.Models.RegistrationModel>
     <div class="container mt-4">
         <h2 class="mb-4" style="text-align:center">Danh sách sinh viên đăng ký</h2>
+        <a asp-action="DuyetGV" class="btn btn-primary">Duyệt Giảng Viên</a>
         <a asp-action="DSGiangVien" class="btn btn-primary">DS Giảng Viên</a>
         <a asp-action="DSLopHP" class="btn btn-primary">DS Lớp học phần</a>
         <hr />
@@ -22,6 +23,7 @@
                     <th>Họ và tên</th>
                     <th>SĐT</th>
                     <th>CCCD</th>
+                    <th>Giới tính</th>
                     <th>Quê quán</th>
                     <th>Ngành học</th>
                     <th>Điểm TBM 1</th>
@@ -38,6 +40,7 @@
                         <td>@sinhvien.HoTen</td>
                         <td>@sinhvien.CCCD</td>
                         <td>@sinhvien.SDT</td>
+                        <td>@sinhvien.GioiTinh</td>
                         <td>@sinhvien.DiaChi</td>
                         <td>@sinhvien.NganhHoc</td>
                         <td>@sinhvien.DTB1</td>

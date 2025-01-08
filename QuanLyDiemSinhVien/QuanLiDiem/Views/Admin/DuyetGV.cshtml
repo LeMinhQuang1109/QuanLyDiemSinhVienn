@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách giảng viên đăng ký</title>
+    <!-- Thêm Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="~/css/DSLopHP.css" rel="stylesheet" />
+</head>
+<body>
+    @model IEnumerable<QuanLiDiem.Models.GiangVienRegister>
+    <div class="container mt-4">
+        <h2 class="mb-4" style="text-align:center">Danh sách giảng viên đăng ký</h2>
+        <a asp-controller="Admin" asp-action="DuyetSV" class="btn btn-secondary">Quay lại</a>
+        <hr />
+
+        <table id="lopHocPhanTable" class="display>
+            <thead class="thead-dark">
+                <tr>
+                    <th>Họ và tên</th>
+                    <th>SĐT</th>
+                    <th>Email</th>
+                    <th>Quê quán</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var gv in Model)
+                {
+                    <tr data-id="@gv.Id">
+                        <td>@gv.TenGV</td>
+                        <td>@gv.SDT</td>
+                        <td>@gv.Email</td>
+                        <td>@gv.DiaChi</td>
+                        <td>
+                            <button class="btn btn-success btn-sm approve-btn" data-id="@gv.Id">Duyệt</button>
+                            <button class="btn btn-danger btn-sm reject-btn" data-id="@gv.Id">Hủy</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+    <!-- Approve Dialog Modal -->
+    <div class="modal fade" id="approveModal" tabindex="-1" role="dialog" aria-labelledby="approveModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="approveModalLabel">Xác nhận</h5>
+                </div>
+                <div class="modal-body">
+                    Bạn có đồng ý duyệt giảng viên này không?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="confirmApprove">Đồng ý</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reject Dialog Modal -->
+    <div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="rejectModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="rejectModalLabel">Xác nhận</h5>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn hủy đăng ký giảng viên này không?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="confirmReject">Đồng ý</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Thêm Bootstrap JS và jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.approve-btn').click(function() {
+                var giangvienId = $(this).data('id');
+                $('#confirmApprove').data('id', giangvienId);
+                $('#approveModal').modal('show');
+            });
+
+            $('#confirmApprove').click(function() {
+                var giangvienId = $(this).data('id');
+                var row = $('button[data-id="' + giangvienId + '"]').closest('tr');
+
+                $.ajax({
+                    url: '@Url.Action("GVApproveAndDetails", "Admin")',
+                    type: 'POST',
+                    data: { id: giangvienId },
+                    success: function(response) {
+                        if (response.magv) {
+                            window.location.href = '@Url.Action("GVDetails", "Admin", new { magv = "__magv__" })'.replace('__magv__', response.magv);
+                        }
+                        row.remove();
+                        $('#approveModal').modal('hide');
+                    },
+                    error: function() {
+                        alert('Có lỗi xảy ra khi duyệt giảng viên.');
+                    }
+                });
+            });
+
+            $('.reject-btn').click(function() {
+                var giangvienId = $(this).data('id');
+                $('#confirmReject').data('id', giangvienId);
+                $('#rejectModal').modal('show');
+            });
+
+            $('#confirmReject').click(function() {
+                var giangvienId = $(this).data('id');
+                var row = $('button[data-id="' + giangvienId + '"]').closest('tr');
+
+                $.ajax({
+                    url: '@Url.Action("DeleteGV", "Admin")',
+                    type: 'POST',
+                    data: { id: giangvienId },
+                    success: function() {
+                        row.remove();
+                        $('#rejectModal').modal('hide');
+                    },
+                    error: function() {
+                        alert('Có lỗi xảy ra khi hủy giảng viên.');
+                    }
+                });
+            });
+
+            $('.btn-secondary[data-dismiss="modal"]').click(function () {
+                $(this).closest('.modal').modal('hide');
+            });
+        });
+    </script>
+</body>
+</html>

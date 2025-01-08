@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using QuanLiDiem.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace QuanLiDiem.Controllers
 {
@@ -408,9 +410,10 @@ namespace QuanLiDiem.Controllers
                 HoTen = sinhVien.HoTen,
                 CanCuocCongDan = sinhVien.CCCD,
                 SoDienThoai = sinhVien.SDT,
+                GioiTinh = sinhVien.GioiTinh,
                 DiaChi = sinhVien.DiaChi,
                 MaNganh = sinhVien.NganhHoc,
-                VaiTro = "SinhVien",
+                VaiTro = "Sinh Viên",
                 TenTaiKhoan = mssv, // Gán tên tài khoản là MSSV
                 MatKhau = Guid.NewGuid().ToString().Substring(0, 8) // Tạo mật khẩu ngẫu nhiên
             };
@@ -421,6 +424,85 @@ namespace QuanLiDiem.Controllers
 
             // Trả về MSSV để dùng trong JavaScript
             return Json(new { mssv = mssv });
+        }
+
+
+        // Action để duyệt giảng viên
+        public IActionResult DuyetGV()
+        {
+            // Lấy danh sách sinh viên chưa bị duyệt
+            var giangviens = _context.GiangVienRegisters.ToList();
+            return View(giangviens);
+        }
+
+        // POST: SinhVien/Delete
+        [HttpPost]
+        public IActionResult DeleteGV(int id)
+        {
+            var giangvien = _context.GiangVienRegisters.Find(id);
+            if (giangvien != null)
+            {
+                _context.GiangVienRegisters.Remove(giangvien);
+                _context.SaveChanges();
+            }
+            return RedirectToAction(nameof(DuyetGV));
+        }
+
+        // Action "Details" nhận tham số mssv
+        public IActionResult GVDetails(string magv)
+        {
+            if (string.IsNullOrEmpty(magv))
+            {
+                return NotFound(); // Nếu mssv không hợp lệ, trả về lỗi 404
+            }
+
+            // Tìm sinh viên theo mssv
+            var giangVien = _context.GiangViens.FirstOrDefault(s => s.MaGV == magv);
+            if (giangVien == null)
+            {
+                return NotFound(); // Nếu không tìm thấy sinh viên với mssv này
+            }
+
+            return View(giangVien); // Trả về View Details với dữ liệu sinh viên
+        }
+
+        // Action để duyệt và chuyển hướng sang Details
+        [HttpPost]
+        public IActionResult GVApproveAndDetails(int id)
+        {
+            var giangVien = _context.GiangVienRegisters.Find(id);
+            if (giangVien == null)
+            {
+                return NotFound(); // Nếu không tìm thấy sinh viên, trả về lỗi 404
+            }
+
+            // Tạo MSSV với định dạng "4451050???"
+            Random rand = new Random();
+            string magv = $"GV{rand.Next(100, 1000):D3}";  // Tạo MSSV với 3 số ngẫu nhiên cuối
+
+            // Xóa sinh viên khỏi danh sách đăng ký
+            _context.GiangVienRegisters.Remove(giangVien);
+            _context.SaveChanges();
+
+            // Tạo đối tượng sinh viên mới để hiển thị trong View Details
+            var danhSachGiangVien = new GiangVien
+            {
+                MaGV = magv,  // Gán MSSV vừa tạo
+                TenGV = giangVien.TenGV,
+                SoDienThoai = giangVien.SDT,
+                Email = giangVien.Email,
+                DiaChi = giangVien.DiaChi,
+                VaiTro = "Giảng Viên",
+                TenTaiKhoan = magv, // Gán tên tài khoản là MSSV
+                MatKhau = Guid.NewGuid().ToString().Substring(0, 8) // Tạo mật khẩu ngẫu nhiên
+            };
+
+            // Lưu sinh viên mới vào bảng DanhSachSinhVien
+            _context.GiangViens.Add(danhSachGiangVien);
+            _context.SaveChanges();
+
+            // Trả về MSSV để dùng trong JavaScript
+            return Json(new { magv = magv });
         }
     }
 }

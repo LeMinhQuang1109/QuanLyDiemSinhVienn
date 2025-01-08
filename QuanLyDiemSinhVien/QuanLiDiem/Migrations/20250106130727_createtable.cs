@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace QuanLiDiem.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateTable : Migration
+    public partial class createtable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,6 +20,7 @@ namespace QuanLiDiem.Migrations
                     HoTen = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CCCD = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SDT = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GioiTinh = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DiaChi = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NganhHoc = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DTB1 = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -61,6 +62,7 @@ namespace QuanLiDiem.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MSSV = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MaHP = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TenHP = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SoTinChi = table.Column<int>(type: "int", nullable: false),
                     DiemQuaTrinh = table.Column<double>(type: "float", nullable: false),
                     DiemCuoiKy = table.Column<double>(type: "float", nullable: false),
@@ -83,11 +85,30 @@ namespace QuanLiDiem.Migrations
                     TenGV = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     SoDienThoai = table.Column<string>(type: "char(10)", unicode: false, fixedLength: true, maxLength: 10, nullable: true),
-                    DiaChi = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true)
+                    DiaChi = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    TenTaiKhoan = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MatKhau = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VaiTro = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK__GiangVie__2725AEF38D82FDC2", x => x.MaGV);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GiangVienRegisters",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TenGV = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SDT = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DiaChi = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GiangVienRegisters", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -162,6 +183,9 @@ namespace QuanLiDiem.Migrations
 
             migrationBuilder.DropTable(
                 name: "Diem");
+
+            migrationBuilder.DropTable(
+                name: "GiangVienRegisters");
 
             migrationBuilder.DropTable(
                 name: "SinhViens");

@@ -2,7 +2,7 @@
 
 public class LoginViewModel
 {
-    [Display(Name = "Mã Sinh Viên")]
+    [Display(Name = "Tài khoản")]
     [Required(ErrorMessage = "Tên đăng nhập là bắt buộc.")]
     public string? TenTaiKhoan { get; set; }
 

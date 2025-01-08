@@ -1,8 +1,11 @@
 wwwroot\css\capnhattt.css
 wwwroot\css\dsDiem.css
+wwwroot\css\DSLopHP.css
 wwwroot\css\searchCss.css
 wwwroot\css\site.css
 wwwroot\css\style.css
+wwwroot\css\taolopHP.css
+wwwroot\css\xemdiem.css
 wwwroot\favicon.ico
 wwwroot\images\background.jpg
 wwwroot\images\iconchucnang.png

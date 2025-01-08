@@ -1,0 +1,14 @@
+﻿@model QuanLiDiem.Models.GiangVien
+<h2>Chi tiết sinh viên</h2>
+
+<div>
+    <p>MaGV: @Model.TenGV</p>
+    <p>Số điện thoại: @Model.SoDienThoai</p>
+    <p>Email: @Model.Email</p>
+    <p>Địa chỉ: @Model.DiaChi</p>
+    <p>Tên tài khoản: @Model.TenTaiKhoan</p>
+    <p>Mật khẩu: @Model.MatKhau</p>
+    <p>Vai trò: @Model.VaiTro</p>
+</div>
+
+<a href="@Url.Action("DuyetGV", "Admin")" class="btn btn-primary">Quay lại</a>

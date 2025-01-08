@@ -16,6 +16,7 @@ namespace QuanLiDiem.Data
         public DbSet<GiangVien> GiangViens { get; set; }
         public DbSet<LopHocPhan> LopHocPhans { get; set; }
         public DbSet<SinhVien_HocPhan> SinhViens { get; set; }
+        public DbSet<GiangVienRegister> GiangVienRegisters { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

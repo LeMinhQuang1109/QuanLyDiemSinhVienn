@@ -20,6 +20,10 @@ namespace QuanLiDiem.Models
         [RegularExpression(@"^0\d{9}$", ErrorMessage = "Số điện thoại phải bắt đầu bằng 0 và có đúng 10 chữ số.")]
         public string? SDT { get; set; }
 
+        [Display(Name = "Giới tính")]
+        [Required(ErrorMessage = "Giới tính là bắt buộc.")]
+        public string? GioiTinh { get; set; }
+
         [Display(Name = "Địa chỉ")]
         [Required(ErrorMessage = "Địa Chỉ là bắt buộc.")]
         public string? DiaChi { get; set; }
@@ -48,6 +52,4 @@ namespace QuanLiDiem.Models
         [Required(ErrorMessage = "Xếp loại là bắt buộc.")]
         public string? XepLoai { get; set; }
     }
-
-
 }

@@ -17,6 +17,10 @@ public class Diem
     public string MaHP { get; set; }
 
     [Required]
+    [Display(Name = "Tên học phần")]
+    public string TenHP { get; set; }
+
+    [Required]
     [Range(1, 4, ErrorMessage = "Số tín chỉ phải từ 1 đến 4")]
     [Display(Name = "Số tín chỉ")]
     public int SoTinChi { get; set; }

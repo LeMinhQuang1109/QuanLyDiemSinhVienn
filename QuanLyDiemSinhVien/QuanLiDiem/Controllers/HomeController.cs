@@ -21,6 +21,13 @@ public class HomeController : Controller
         return View();
     }
 
+    // Action GET để hiển thị form đăng ký dành cho giảng viên
+    [HttpGet]
+    public IActionResult RegisterGV()
+    {
+        return View();
+    }
+
     // Action POST để xử lý đăng ký
     [HttpPost]
     public async Task<IActionResult> Register(RegistrationModel registration)
@@ -35,6 +42,21 @@ public class HomeController : Controller
         return View(registration);
     }
 
+    // Action POST để xử lý đăng ký
+    [HttpPost]
+    public async Task<IActionResult> RegisterGV(GiangVienRegister registration)
+    {
+        if (ModelState.IsValid)
+        {
+            // Bỏ qua kiểm tra tên tài khoản đã tồn tại, thêm trực tiếp người dùng vào cơ sở dữ liệu
+            _context.Add(registration);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Login");
+        }
+        return View(registration);
+    }
+
+
     // Action GET để hiển thị form đăng nhập
     [HttpGet]
     public IActionResult Login()
@@ -45,44 +67,76 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult Login(LoginViewModel login)
     {
+        // Tạo tài khoản admin mặc định nếu chưa có
+        var adminDefault = _context.DanhSachSinhVien
+            .FirstOrDefault(u => u.TenTaiKhoan == "admin");
+
+        if (adminDefault == null)
+        {
+            var admin = new DanhSachSinhVien
+            {
+                TenTaiKhoan = "admin",
+                MatKhau = "123456", // Mật khẩu mặc định
+                HoTen = "Quản trị viên",
+                MSSV = "ADMIN001",
+                VaiTro = "Admin"
+            };
+
+            _context.DanhSachSinhVien.Add(admin);
+            _context.SaveChanges();
+        }
         if (ModelState.IsValid)
         {
-           
-
+            // Kiểm tra trong bảng DanhSachSinhVien
             var user = _context.DanhSachSinhVien
                 .FirstOrDefault(u => u.TenTaiKhoan == login.TenTaiKhoan && u.MatKhau == login.MatKhau);
 
-            if (user != null)
+            // Kiểm tra trong bảng GiangVien nếu không tìm thấy trong DanhSachSinhVien
+            if (user == null)
             {
-                // Lưu tên tài khoản vào session
-                HttpContext.Session.SetString("HoTen", user.HoTen);
-                HttpContext.Session.SetString("MSV", user.MSSV);
+                var userGV = _context.GiangViens
+                    .FirstOrDefault(u => u.TenTaiKhoan == login.TenTaiKhoan && u.MatKhau == login.MatKhau);
 
-                // Kiểm tra quyền của người dùng và chuyển hướng đến trang tương ứng
-                if (user.VaiTro == "Admin")
+                if (userGV != null)
                 {
-                    return RedirectToAction("DuyetSV", "Admin");
-                }
-                else if (user.VaiTro == "SinhVien")
-                {
-                    return RedirectToAction("TimKiem", "User");
-                }
-                else if (user.VaiTro == "GiangVien")
-                {
+                    // Lưu thông tin giảng viên vào session
+                    HttpContext.Session.SetString("HoTen", userGV.TenGV);
+                    HttpContext.Session.SetString("MaGV", userGV.MaGV);
+                    HttpContext.Session.SetString("Role", "GiangVien");
+
+
+                    // Chuyển hướng giảng viên đến trang tương ứng
                     return RedirectToAction("Index", "GiangVien");
-                }
-                else
-                {
-                    // Nếu không có vai trò, có thể chuyển hướng về trang mặc định
-                    return RedirectToAction("Index");
                 }
             }
             else
             {
-                // Thêm thông báo lỗi vào ViewData để hiển thị trong modal
-                ViewData["ErrorMessage"] = "Tên đăng nhập hoặc mật khẩu không đúng.";
+                // Lưu thông tin sinh viên vào session
+                HttpContext.Session.SetString("HoTen", user.HoTen);
+                HttpContext.Session.SetString("MSV", user.MSSV);
+                HttpContext.Session.SetString("Role", "SinhVien");
+
+
+                // Kiểm tra quyền của người dùng và chuyển hướng
+                if (user.VaiTro == "Admin")
+                {
+                    return RedirectToAction("DuyetSV", "Admin");
+                }
+                else if (user.VaiTro == "Sinh Viên")
+                {
+                    return RedirectToAction("TimKiem", "User");
+                }
+                else
+                {
+                    // Nếu không có vai trò, chuyển hướng mặc định
+                    return RedirectToAction("Index");
+                }
             }
+
+            // Nếu không tìm thấy trong cả hai bảng
+            ViewData["ErrorMessage"] = "Tên đăng nhập hoặc mật khẩu không đúng.";
         }
+
         return View(login);
     }
 
@@ -110,6 +164,9 @@ public class HomeController : Controller
             var user = _context.DanhSachSinhVien
                 .FirstOrDefault(u => u.TenTaiKhoan == model.TenTaiKhoan);
 
+            var userGV = _context.GiangViens
+                .FirstOrDefault(u => u.TenTaiKhoan == model.TenTaiKhoan);
+
             if (user != null && user.MatKhau == model.MatKhauCu)
             {
                 if (model.MatKhauMoi == model.XacNhanMatKhau)
@@ -119,7 +176,27 @@ public class HomeController : Controller
                     await _context.SaveChangesAsync();
 
                     TempData["SuccessMessage"] = "Mật khẩu đã được thay đổi thành công.";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("ChangePassword");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Mật khẩu mới và mật khẩu xác nhận không khớp.");
+                }
+            }
+            else if (userGV != null && userGV.MatKhau == model.MatKhauCu)
+            {
+                if (model.MatKhauMoi == model.XacNhanMatKhau)
+                {
+                    userGV.MatKhau = model.MatKhauMoi;
+                    _context.Update(userGV);
+                    await _context.SaveChangesAsync();
+
+                    // Lưu tên tài khoản vào session
+                    HttpContext.Session.SetString("HoTen", userGV.TenGV);
+                    HttpContext.Session.SetString("MGV", userGV.MaGV);
+
+                    TempData["SuccessMessage"] = "Mật khẩu đã được thay đổi thành công.";
+                    return RedirectToAction("Index", "GiangVien");
                 }
                 else
                 {
@@ -133,7 +210,6 @@ public class HomeController : Controller
         }
         return View(model);
     }
-
 
 
     // Action GET để xử lý đăng xuất

@@ -21,8 +21,18 @@ namespace QuanLiDiem.Controllers
         // GET: DanhSachSinhVien
         public IActionResult Index(string searchTerm)
         {
-            // Lấy danh sách lớp học phần từ cơ sở dữ liệu
-            var lopHocPhans = _context.LopHocPhans.AsQueryable();
+            // Lấy MGV từ session
+            var maGV = HttpContext.Session.GetString("MaGV");
+
+            if (string.IsNullOrEmpty(maGV))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            // Lấy danh sách lớp học phần thuộc giảng viên
+            var lopHocPhans = _context.LopHocPhans
+                .Where(lhp => lhp.MaGV == maGV) // Lọc lớp học phần theo MaGV từ session
+                .AsQueryable();
 
             // Lọc theo từ khóa tìm kiếm (Mã HP hoặc Tên HP)
             if (!string.IsNullOrEmpty(searchTerm))
@@ -30,7 +40,7 @@ namespace QuanLiDiem.Controllers
                 lopHocPhans = lopHocPhans.Where(lhp =>
                     lhp.MaHP.Contains(searchTerm) || lhp.TenHP.Contains(searchTerm));
             }
-          
+
             // Lấy danh sách kết quả
             var model = lopHocPhans.ToList();
 
@@ -47,6 +57,7 @@ namespace QuanLiDiem.Controllers
         }
 
 
+
         // GET: Diems
         public async Task<IActionResult> DiemSV()
         {
@@ -61,24 +72,36 @@ namespace QuanLiDiem.Controllers
                 return NotFound();
             }
 
-            // Kiểm tra xem sinh viên đã có điểm chưa
+            
             // Tạo đối tượng Diem mới và gán MSSV từ query string
             var diem = new Diem
             {
                 MSSV = mssv
             };
 
+            // Truyền đối tượng diem vào view
+            ViewData["Diem"] = diem;
+
             return View();  // Truyền đối tượng diem vào view
         }
+
 
 
 
         // POST: Diems/Create
         [HttpPost]
 
-        public async Task<IActionResult> NhapDiem([Bind("MSSV,MaHP,SoTinChi,DiemQuaTrinh,DiemCuoiKy,Diem10,Diem4,KetQua,HocKy,NamHoc")] Diem diem)
+        public async Task<IActionResult> NhapDiem([Bind("MSSV,MaHP,TenHP,SoTinChi,DiemQuaTrinh,DiemCuoiKy,Diem10,Diem4,KetQua,HocKy,NamHoc")] Diem diem)
         {
+            // Lấy thông tin từ bảng LopHocPhan
+            var lopHocPhan = await _context.LopHocPhans
+                                            .Where(lhp => lhp.MaHP == diem.MaHP)
+                                            .FirstOrDefaultAsync();
 
+            if (lopHocPhan != null)
+            {
+                diem.TenHP = lopHocPhan.TenHP;  // Cập nhật TenHP từ LopHocPhan
+            }
 
             diem.Diem10 = Math.Round(diem.Diem10, 2);
             diem.Diem4 = Math.Round(diem.Diem4, 2);
@@ -113,7 +136,7 @@ namespace QuanLiDiem.Controllers
 
         // POST: Diems/Edit/5
         [HttpPost]
-        public async Task<IActionResult> SuaDiem(int id, [Bind("Id,MSSV,MaHP,SoTinChi,DiemQuaTrinh,DiemCuoiKy,Diem10,Diem4,KetQua,HocKy,NamHoc")] Diem diem)
+        public async Task<IActionResult> SuaDiem(int id, [Bind("Id,MSSV,MaHP,TenHP,SoTinChi,DiemQuaTrinh,DiemCuoiKy,Diem10,Diem4,KetQua,HocKy,NamHoc")] Diem diem)
         {
             if (id != diem.Id) // Kiểm tra xem Id trong URL và Id của bản ghi có khớp không
             {
@@ -185,6 +208,94 @@ namespace QuanLiDiem.Controllers
 
             ViewData["SearchTerm"] = searchTerm;
             return View(sinhViens.ToList());
+        }
+
+
+
+
+
+        // GET: CapNhatTT/Details/{MGV}
+        public async Task<IActionResult> ThongTinGV(string MaGV)
+        {
+            // Lấy MGV từ session
+            var maGV = HttpContext.Session.GetString("MaGV");
+
+            if (maGV == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            // Lấy thông tin giảng viên dựa trên MGV
+            var thongTinGV = await _context.GiangViens
+                .FirstOrDefaultAsync(d => d.MaGV == maGV);
+
+            if (thongTinGV == null)
+            {
+                // Nếu không tìm thấy giảng viên, trả về thông báo lỗi hoặc trang phù hợp
+                return NotFound("Không tìm thấy thông tin giảng viên.");
+            }
+
+            // Truyền thông tin sinh viên vào view
+            return View(thongTinGV);
+        }
+
+
+
+        // GET: DanhSachGiangVien/Edit
+        public IActionResult CapNhat()
+        {
+            // Lấy MSSV từ Session
+            var magv = HttpContext.Session.GetString("MaGV");
+
+            if (string.IsNullOrEmpty(magv))
+            {
+                return RedirectToAction("Login"); // Nếu chưa đăng nhập, chuyển hướng về trang Login
+            }
+
+            // Truy xuất thông tin sinh viên từ cơ sở dữ liệu
+            var giangVien = _context.GiangViens.FirstOrDefault(gv => gv.MaGV == magv);
+
+            if (giangVien == null)
+            {
+                return NotFound(); // Sinh viên không tồn tại
+            }
+
+            return View(giangVien);
+        }
+
+
+        [HttpPost]
+        public IActionResult CapNhat(GiangVien model)
+        {
+            // Lấy MGV từ Session
+            var magv = HttpContext.Session.GetString("MaGV");
+
+            if (string.IsNullOrEmpty(magv))
+            {
+                return RedirectToAction("Login"); // Nếu chưa đăng nhập, chuyển hướng về trang Login
+            }
+
+            // Tìm giảng viên trong cơ sở dữ liệu dựa trên MSSV từ Session
+            var giangVien = _context.GiangViens.FirstOrDefault(gv => gv.MaGV == magv);
+
+            if (giangVien == null)
+            {
+                return NotFound(); 
+            }
+
+            // Cập nhật thông tin từ model
+            giangVien.TenGV = model.TenGV;
+            giangVien.SoDienThoai = model.SoDienThoai;
+            giangVien.DiaChi = model.DiaChi;
+            giangVien.Email = model.Email;
+            giangVien.TenTaiKhoan = model.TenTaiKhoan;
+            giangVien.MatKhau = model.MatKhau;
+
+            // Lưu thay đổi vào cơ sở dữ liệu
+            _context.SaveChanges();
+
+            // Chuyển hướng về trang chi tiết
+            return RedirectToAction("ThongTinGV");
         }
 
 

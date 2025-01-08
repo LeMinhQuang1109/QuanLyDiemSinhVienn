@@ -18,6 +18,7 @@
             <thead class="table-dark">
                 <tr>
                     <th style="text-align: center;">Mã học phần</th>
+                    <th style="text-align: center;">Tên học phần</th>
                     <th style="text-align: center;">Số tín chỉ</th>
                     <th style="text-align: center;">Điểm quá trình</th>
                     <th style="text-align: center;">Điểm cuối kỳ</th>
@@ -34,6 +35,7 @@
                 {
                     <tr>
                         <td>@Html.DisplayFor(modelItem => item.MaHP)</td>
+                        <td>@Html.DisplayFor(modelItem => item.TenHP)</td>
                         <td>@Html.DisplayFor(modelItem => item.SoTinChi)</td>
                         <td>@Html.DisplayFor(modelItem => item.DiemQuaTrinh)</td>
                         <td>@Html.DisplayFor(modelItem => item.DiemCuoiKy)</td>
