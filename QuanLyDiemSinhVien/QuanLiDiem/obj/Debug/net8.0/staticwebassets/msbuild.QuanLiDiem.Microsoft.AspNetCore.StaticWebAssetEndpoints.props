@@ -60,17 +60,17 @@
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"qruewj7hwz"},{"Name":"integrity","Value":"sha256-Ro/wP5XT\u002BRR1S0pxq17FXxjuffHVuVN11\u002BpLvNurBVY="},{"Name":"label","Value":"_content/QuanLiDiem/css/site.css"}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"679"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022Ro/wP5XT\u002BRR1S0pxq17FXxjuffHVuVN11\u002BpLvNurBVY=\u0022"},{"Name":"Last-Modified","Value":"Sun, 05 Jan 2025 10:13:13 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/QuanLiDiem/css/style.1yhajijk99.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\style.css'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"1yhajijk99"},{"Name":"integrity","Value":"sha256-p9vpRLzmz767lTduURyOHOm\u002BOvPDIPyA9MBQE0PIk7E="},{"Name":"label","Value":"_content/QuanLiDiem/css/style.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"4669"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022p9vpRLzmz767lTduURyOHOm\u002BOvPDIPyA9MBQE0PIk7E=\u0022"},{"Name":"Last-Modified","Value":"Sun, 05 Jan 2025 10:13:13 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/QuanLiDiem/css/style.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\style.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-p9vpRLzmz767lTduURyOHOm\u002BOvPDIPyA9MBQE0PIk7E="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"4669"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022p9vpRLzmz767lTduURyOHOm\u002BOvPDIPyA9MBQE0PIk7E=\u0022"},{"Name":"Last-Modified","Value":"Sun, 05 Jan 2025 10:13:13 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-VenGii5DI8Eoap0VLkinDMK1LMwXymqJDeWTelJUukM="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"7042"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022VenGii5DI8Eoap0VLkinDMK1LMwXymqJDeWTelJUukM=\u0022"},{"Name":"Last-Modified","Value":"Wed, 08 Jan 2025 10:03:41 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/QuanLiDiem/css/style.xlg1rx0jw1.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\style.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"xlg1rx0jw1"},{"Name":"integrity","Value":"sha256-VenGii5DI8Eoap0VLkinDMK1LMwXymqJDeWTelJUukM="},{"Name":"label","Value":"_content/QuanLiDiem/css/style.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"7042"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022VenGii5DI8Eoap0VLkinDMK1LMwXymqJDeWTelJUukM=\u0022"},{"Name":"Last-Modified","Value":"Wed, 08 Jan 2025 10:03:41 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/QuanLiDiem/css/taolopHP.6ecmxg0kil.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\taolopHP.css'))</AssetFile>

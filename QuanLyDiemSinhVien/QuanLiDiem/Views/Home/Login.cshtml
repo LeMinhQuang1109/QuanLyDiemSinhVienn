@@ -4,10 +4,16 @@
     ViewData["Title"] = "Đăng Nhập";
 }
 
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/css/style.css" />
+</head>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card mt-5 shadow-lg border-0 card-login">
+            <div class="card mt-5 shadow-lg border-0 card-login form-login">
                 <div class="card-header text-center bg-dark text-white">
                     <h2>Đăng Nhập</h2>
                 </div>
@@ -70,17 +76,15 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
+            // Thêm lớp "show" để kích hoạt hiệu ứng fade-in khi trang được tải
+            $(".form-login").addClass("show");
+
             if ("@ViewData["ErrorMessage"]" !== "") {
                 var errorModal = new bootstrap.Modal(document.getElementById('errorModal'), {
                     keyboard: false
                 });
                 errorModal.show();
             }
-
-            // Khi nhấn "Đóng" modal, không điều hướng đi đâu, chỉ đóng modal lại
-            $('#errorModal').on('hidden.bs.modal', function () {
-                // Không làm gì thêm khi modal đóng
-            });
 
             // Thêm chức năng hiển thị/ẩn mật khẩu
             document.getElementById('ShowPassword').addEventListener('change', function () {

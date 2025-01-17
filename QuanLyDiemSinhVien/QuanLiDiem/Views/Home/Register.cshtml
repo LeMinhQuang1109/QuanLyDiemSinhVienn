@@ -4,36 +4,38 @@
     ViewData["Title"] = "Đăng Ký";
 }
 
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/css/style.css" />
+</head>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card mt-5 shadow-lg border-0 card-login">
+            <div class="card mt-5 shadow-lg border-0 card-login form-register">
                 <div class="card-header text-center bg-dark text-white">
                     <h2>Đăng Ký</h2>
                 </div>
-                <div class="card-body p-5" style="background-color: white">
-
+                <div class="card-body p-5" style="background-color: white;">
                     <form method="post" asp-action="Register">
                         <div class="form-group">
-                            <b><label for="HoTen">Họ tên</label></b>
+                            <label for="HoTen">Họ tên</label>
                             <input type="text" class="form-control" id="HoTen" name="HoTen" required />
                             <span asp-validation-for="HoTen" class="text-danger"></span>
-
                         </div>
                         <div class="form-group">
-                            <b><label for="CCCD">CCCD</label></b>
+                            <label for="CCCD">CCCD</label>
                             <input type="text" class="form-control" id="CCCD" name="CCCD" required />
                             <span asp-validation-for="CCCD" class="text-danger"></span>
-
                         </div>
                         <div class="form-group">
-                            <b><label for="SDT">Số điện thoại</label></b>
+                            <label for="SDT">Số điện thoại</label>
                             <input type="text" class="form-control" id="SDT" name="SDT" required />
                             <span asp-validation-for="SDT" class="text-danger"></span>
-
                         </div>
                         <div class="form-group">
-                            <b><label for="GioiTinh">Giới tính</label></b>
+                            <label for="GioiTinh">Giới tính</label>
                             <select class="form-control" id="GioiTinh" name="GioiTinh" required>
                                 <option value="" disabled selected>Chọn giới tính</option>
                                 <option value="Nam">Nam</option>
@@ -42,46 +44,41 @@
                             <span asp-validation-for="GioiTinh" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <b><label for="DiaChi">Địa chỉ</label></b>
+                            <label for="DiaChi">Địa chỉ</label>
                             <input type="text" class="form-control" id="DiaChi" name="DiaChi" required />
                             <span asp-validation-for="DiaChi" class="text-danger"></span>
-
                         </div>
                         <div class="form-group">
-                            <b><label for="NganhHoc">Ngành học</label></b>
+                            <label for="NganhHoc">Ngành học</label>
                             <select class="form-control" id="NganhHoc" name="NganhHoc" required>
                                 <option value="">Chọn ngành học</option>
                                 <option value="KhoaHocMayTinh">Khoa học máy tính</option>
                                 <option value="Marketing">Marketing</option>
                                 <option value="KeToan">Kế toán</option>
                                 <option value="QuanTriKinhDoanh">Quản trị kinh doanh</option>
-                                <option value="Công Nghệ Thông Tin">Công Nghệ Thông Tin</option>
+                                <option value="CongNgheThongTin">Công Nghệ Thông Tin</option>
                             </select>
                             <span asp-validation-for="NganhHoc" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <b><label for="DTB1">Điểm TBM 1</label></b>
+                            <label for="DTB1">Điểm TBM 1</label>
                             <input type="number" step="0.01" class="form-control" id="DTB1" name="DTB1" required />
                             <span asp-validation-for="DTB1" class="text-danger"></span>
-
                         </div>
                         <div class="form-group">
-                            <b><label for="DTB2">Điểm TBM 2</label></b>
+                            <label for="DTB2">Điểm TBM 2</label>
                             <input type="number" step="0.01" class="form-control" id="DTB2" name="DTB2" required />
                             <span asp-validation-for="DTB2" class="text-danger"></span>
-
                         </div>
                         <div class="form-group">
-                            <b><label for="DTB3">Điểm TBM 3</label></b>
+                            <label for="DTB3">Điểm TBM 3</label>
                             <input type="number" step="0.01" class="form-control" id="DTB3" name="DTB3" required />
                             <span asp-validation-for="DTB3" class="text-danger"></span>
-
                         </div>
                         <div class="form-group">
-                            <b><label for="XepLoai">Xếp loại 12</label></b>
+                            <label for="XepLoai">Xếp loại 12</label>
                             <input type="text" class="form-control" id="XepLoai" name="XepLoai" required />
                             <span asp-validation-for="XepLoai" class="text-danger"></span>
-
                         </div>
                         <br>
                         <button type="submit" class="btn btn-dark w-100">Đăng Ký</button>

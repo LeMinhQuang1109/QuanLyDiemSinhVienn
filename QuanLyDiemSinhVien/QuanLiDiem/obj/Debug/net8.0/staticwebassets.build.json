@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7W4hH1dEubGXo+BLbirdgtskqRbZxWgb3RQJTFHQakw=",
+  "Hash": "vDZwB2EXg+hwCsRIVesLnD4Ix607j+XicH28whdMcWI=",
   "Source": "QuanLiDiem",
   "BasePath": "_content/QuanLiDiem",
   "Mode": "Default",
@@ -178,8 +178,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "1yhajijk99",
-      "Integrity": "p9vpRLzmz767lTduURyOHOm+OvPDIPyA9MBQE0PIk7E=",
+      "Fingerprint": "xlg1rx0jw1",
+      "Integrity": "VenGii5DI8Eoap0VLkinDMK1LMwXymqJDeWTelJUukM=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\style.css"
@@ -2046,51 +2046,6 @@
       ]
     },
     {
-      "Route": "css/style.1yhajijk99.css",
-      "AssetFile": "C:\\Users\\BKO\\Documents\\GitHub\\QuanLyDiemSinhVienn\\QuanLyDiemSinhVien\\QuanLiDiem\\wwwroot\\css\\style.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "4669"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"p9vpRLzmz767lTduURyOHOm+OvPDIPyA9MBQE0PIk7E=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 05 Jan 2025 10:13:13 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "1yhajijk99"
-        },
-        {
-          "Name": "label",
-          "Value": "css/style.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-p9vpRLzmz767lTduURyOHOm+OvPDIPyA9MBQE0PIk7E="
-        }
-      ]
-    },
-    {
       "Route": "css/style.css",
       "AssetFile": "C:\\Users\\BKO\\Documents\\GitHub\\QuanLyDiemSinhVienn\\QuanLyDiemSinhVien\\QuanLiDiem\\wwwroot\\css\\style.css",
       "Selectors": [],
@@ -2101,7 +2056,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4669"
+          "Value": "7042"
         },
         {
           "Name": "Content-Type",
@@ -2109,11 +2064,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"p9vpRLzmz767lTduURyOHOm+OvPDIPyA9MBQE0PIk7E=\""
+          "Value": "\"VenGii5DI8Eoap0VLkinDMK1LMwXymqJDeWTelJUukM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 05 Jan 2025 10:13:13 GMT"
+          "Value": "Wed, 08 Jan 2025 10:03:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2123,7 +2078,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-p9vpRLzmz767lTduURyOHOm+OvPDIPyA9MBQE0PIk7E="
+          "Value": "sha256-VenGii5DI8Eoap0VLkinDMK1LMwXymqJDeWTelJUukM="
+        }
+      ]
+    },
+    {
+      "Route": "css/style.xlg1rx0jw1.css",
+      "AssetFile": "C:\\Users\\BKO\\Documents\\GitHub\\QuanLyDiemSinhVienn\\QuanLyDiemSinhVien\\QuanLiDiem\\wwwroot\\css\\style.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7042"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VenGii5DI8Eoap0VLkinDMK1LMwXymqJDeWTelJUukM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 08 Jan 2025 10:03:41 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "xlg1rx0jw1"
+        },
+        {
+          "Name": "label",
+          "Value": "css/style.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-VenGii5DI8Eoap0VLkinDMK1LMwXymqJDeWTelJUukM="
         }
       ]
     },

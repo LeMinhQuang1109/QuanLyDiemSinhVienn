@@ -237,3 +237,128 @@ th.ghi-chu, td.ghi-chu {
     vertical-align: middle;
     padding: 20px 0 0 0;
 }
+
+
+.animated-text {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 35px;
+    font-weight: bold;
+    color: #333;
+    animation: fadeInMove 2s ease-in-out, colorChange 4s infinite alternate;
+}
+
+/* Hiệu ứng xuất hiện và di chuyển */
+@keyframes fadeInMove {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hiệu ứng đổi màu */
+@keyframes colorChange {
+    0% {
+        color: #333;
+    }
+
+    50% {
+        color: #ffa500;
+    }
+
+    100% {
+        color: #007bff;
+    }
+}
+
+
+/* Hiệu ứng cho form đăng nhập */
+.form-login {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInMove 0.5s ease-in-out forwards;
+}
+
+/* Hiệu ứng xuất hiện và di chuyển */
+@keyframes fadeInMove {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card-header h2 {
+    color: white; /* Đổi màu chữ thành trắng */
+}
+
+/* Hiệu ứng cho form đăng ký */
+.form-register {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInMove 0.5s ease-in-out forwards;
+}
+
+/* Hiệu ứng xuất hiện và di chuyển */
+@keyframes fadeInMove {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Hiệu ứng cho form đăng ký giảng viên */
+.form-register-gv {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInMove 0.5s ease-in-out forwards;
+}
+
+/* Hiệu ứng xuất hiện và di chuyển */
+@keyframes fadeInMove {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Hiệu ứng cho form đổi mật khẩu */
+.form-change-password {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInMove 0.5s ease-in-out forwards;
+}
+
+/* Hiệu ứng xuất hiện và di chuyển */
+@keyframes fadeInMove {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
